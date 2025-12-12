@@ -106,6 +106,7 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (5.26.1)
     msgpack (1.8.0)
     net-imap (0.4.22)
@@ -118,7 +119,8 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
-    nokogiri (1.15.7-x86_64-linux)
+    nokogiri (1.15.7)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pg (1.5.9)
     public_suffix (5.1.1)
@@ -182,7 +184,7 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.1.0)
-    spring (4.3.0)
+    spring (4.2.1)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -237,7 +239,7 @@ DEPENDENCIES
   rails (~> 6.1.7, >= 6.1.7.10)
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
-  spring
+  spring (~> 4.2.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
