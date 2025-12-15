@@ -1,10 +1,84 @@
-<h1>Hello World!</h1>
-<%= link_to 'Privacy Policy', privacy_policy_path, class: "btn btn-lg btn-warning" %>
-<%= link_to privacy_policy_path, class: "btn btn-lg btn-warning" do %>
-  <i class="fas fa-file-word"></i>
-  Privacy Policy
-<% end %>
-<%= link_to courses_path, class: "btn btn-lg btn-success" do %>
-  <i class="fa-solid fa-book"></i>
-  Courses
-<% end %>
+<div class="container-fluid text-lg-left p-5 bg-light">
+  <div class="display-4">
+    What do you want to learn today?
+  </div>
+  <div class="p-4"></div>
+  <form class="d-flex" role="search">
+    <%= form_tag courses_path, method: :get do %>
+      <%= text_field_tag :title, params[:title], autocomplete: 'off', class: 'form-control me-2', placeholder: 'Search', aria_label: 'Search' %>
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    <% end %>
+  </form>
+</div>
+
+<div class="card-group">
+  <div class="card card-body">
+    <h1>
+      <i class="fa-solid fa-graduation-cap"></i>
+      </h1>
+    <%= Course.count %>
+    online courses
+    <div class="row"></div>
+    Explore a variety of fresh topics
+  </div>
+  <div class="card card-body">
+    <h1>
+      <i class="fa-solid fa-chalkboard-user"></i>
+    </h1>
+    <%= Course.distinct.count(:user_id) %>
+    expert instructors
+    <div class="row"></div>
+    Find the right instructor for you
+  </div>
+  <div class="card card-body">
+    <h1>
+      <i class="fa-solid fa-user-graduate"></i>
+    </h1>
+    <%= User.count %>
+    active learners
+    <div class="row"></div>
+    Join the knowledge-sharing community
+  </div>
+  <div class="card card-body">
+    <h1>
+      <i class="fa-solid fa-infinity"></i>
+    </h1>
+    Lifetime access
+    <div class="row"></div>
+    Learn on your schedule
+  </div>
+</div>
+
+<hr>
+<h3>Popular Courses</h3>
+<div class="container my-4">
+  <div class="row" data-masonry='{"percentPosition": true }'>
+    <% @popular_courses.each do |course| %>
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <%= render "courses/course", course: course %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr>
+<h3>Top Rated Courses</h3>
+<div class="container my-4">
+  <div class="row" data-masonry='{"percentPosition": true }'>
+    <% @top_rated_courses.each do |course| %>
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <%= render "courses/course", course: course %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr>
+<h3>Most Recent Courses</h3>
+<div class="container my-4">
+  <div class="row" data-masonry='{"percentPosition": true }'>
+    <% @most_recent_courses.each do |course| %>
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <%= render "courses/course", course: course %>
+      </div>
+    <% end %>
+  </div>
+</div>
