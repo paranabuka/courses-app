@@ -1,0 +1,9 @@
+<div class="container my-4">
+  <div class="row" data-masonry='{"percentPosition": true }'>
+    <% @users.each do |user| %>
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <%= render partial: "user", locals: { user: user } %>
+      </div>
+    <% end %>
+  </div>
+</div>

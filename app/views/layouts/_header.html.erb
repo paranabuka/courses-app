@@ -17,6 +17,10 @@
           <div class="fa fa-book"></div>
           Courses
         <% end %>
+        <%= link_to users_path, class: "nav-link #{'active fw-bold' if current_page?(users_path)}" do %>
+          <div class="fa fa-users"></div>
+          Users
+        <% end %>
       </ul>
       <form class="d-flex" role="search">
         <%= form_tag courses_path, method: :get do %>
