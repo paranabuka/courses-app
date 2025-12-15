@@ -58,6 +58,10 @@ development:
 test:
   <<: *default
   database: courses_app_test
+  host: localhost
+  port: 5432
+  username: courses_app
+  password: qwerty123
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
