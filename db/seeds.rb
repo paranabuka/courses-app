@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 user = User.create!(
-  email: 'admin@example.com',
+  email: 'test@example.com',
   password: 'qwerty123',
   password_confirmation: 'qwerty123'
 )
@@ -16,8 +16,8 @@ user = User.create!(
     title: Faker::Educator.course_name,
     description: Faker::Lorem.paragraph(sentence_count: 5),
     short_description: Faker::Lorem.paragraph(sentence_count: 1),
-    language: ["English", "Portuguese"].sample,
-    level: ["Beginner", "Intermediate", "Advanced"].sample,
+    language: Course::LANGUAGES.sample,
+    level: Course::LEVELS.sample,
     price: Faker::Number.between(from: 1000, to: 20000),
     user_id: user.id
   )

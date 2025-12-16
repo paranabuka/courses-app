@@ -7,12 +7,36 @@
   New Course
 <% end %>
 
-<div class="container my-4">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @courses.each do |course| %>
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <%= render partial: "course", locals: { course: course } %>
-      </div>
+<div class="row">
+  <div class="col-md-2">
+    <%= search_form_for @q do |f| %>
+      <%= f.label :title %>
+      <%= f.search_field :title_cont, placeholder: "Title", class: "form-control form-control-sm" %>
+      <%= f.label :description %>
+      <%= f.search_field :short_description_cont, placeholder: "Description", class: "form-control form-control-sm" %>
+      <%= f.label :language %>
+      <%= f.select :language_cont, Course.languages, include_blank: true, class: "form-control form-control-sm" %>
+      <%= f.label :level %>
+      <%= f.select :level_cont, Course.levels, include_blank: true, class: "form-control form-control-sm" %>
+      <%= f.label :price %>
+      <%= f.search_field :price_eq, placeholder: "Price", class: "form-control form-control-sm" %>
+      <%= f.label :instructor %>
+      <%= f.search_field :user_email_cont, placeholder: "Instructor", class: "form-control form-control-sm" %>
+      <%= f.submit %>
+      <%= link_to courses_path, class: "btn btn-sm" do %>
+        <i class="fa-solid fa-rotate"></i>
+      <% end %>
     <% end %>
+  </div>
+  <div class="col-md-10">
+    <div class="container my-4">
+      <div class="row" data-masonry='{"percentPosition": true }'>
+        <% @courses.each do |course| %>
+          <div class="col-sm-6 col-lg-4 mb-4">
+            <%= render partial: "course", locals: { course: course } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

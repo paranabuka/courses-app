@@ -12,4 +12,22 @@ class Course < ApplicationRecord
   def to_s
     title
   end
+
+  LANGUAGES = %w[English Portuguese Spanish French German]
+  def self.languages
+    LANGUAGES.map { |lang| [lang, lang] }
+  end
+
+  LEVELS = %w[Beginner Intermediate Advanced]
+  def self.levels
+    LEVELS.map { |level| [level, level] }
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title short_description language level price]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[user]
+  end
 end

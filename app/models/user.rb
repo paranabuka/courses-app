@@ -10,6 +10,10 @@ class User < ApplicationRecord
     email
   end
 
+  def username
+    email.split('@').first
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     %w[email]
   end
