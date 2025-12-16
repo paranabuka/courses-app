@@ -15,6 +15,10 @@ user = User.create!(
   Course.create!(
     title: Faker::Educator.course_name,
     description: Faker::Lorem.paragraph(sentence_count: 5),
+    short_description: Faker::Lorem.paragraph(sentence_count: 1),
+    language: ["English", "Portuguese"].sample,
+    level: ["Beginner", "Intermediate", "Advanced"].sample,
+    price: Faker::Number.between(from: 1000, to: 20000),
     user_id: user.id
   )
 end

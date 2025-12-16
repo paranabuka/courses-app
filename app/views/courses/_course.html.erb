@@ -1,16 +1,32 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">
-      <i class="fa-solid fa-book-open"></i>
+      <i class="fa-solid fa-graduation-cap"></i>
       <%= link_to course.title, course %>
     </h5>
-    <p class="card-text"><%= course.description %></p>
+    <p class="card-text"><%= course.short_description %></p>
     <div class="card-footer">
-      <i class="fa-regular fa-clock"></i>
-      <%= course.created_at.strftime("%Y-%m-%d") %>
-      <div class="row"></div>
-      <i class="fa-solid fa-chalkboard-user"></i>
-      <%= course.user %>
+      <%= number_to_currency(course.price) %>
+    </div>
+    <div class="card-footer d-flex">
+      <div class="flex-grow-1">
+        <i class="fa-solid fa-earth-africa"></i>
+        <%= course.language %>
+      </div>
+      <div>
+        <i class="fa-solid fa-signal"></i>
+        <%= course.level %>
+      </div>
+    </div>
+    <div class="card-footer d-flex">
+      <div class="flex-grow-1">
+        <i class="fa-regular fa-clock"></i>
+        <%= course.created_at.strftime("%Y-%m-%d") %>
+      </div>
+      <div>
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <%= course.user %>
+      </div>
     </div>
     <div class="card-footer">
       <%= link_to 'Show', course, class: 'btn btn-sm btn-outline-primary' %>
