@@ -7,3 +7,42 @@
     <% end %>
   </div>
 </div>
+
+<div class="form-inline">
+  <%= search_form_for @q do |f| %>
+    <%= f.search_field :email_cont, placeholder: "Email" %>
+    <%= f.submit %>
+    <%= link_to users_path, class: "btn btn-sm" do %>
+      <i class="fa-solid fa-rotate"></i>
+    <% end %>
+  <% end %>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"><%= sort_link(@q, :id) %></th>
+      <th scope="col"><%= sort_link(@q, :email) %></th>
+      <th scope="col"><%= 'created_at'.humanize %></th>
+      <th scope="col"><%= 'sign_in_count'.humanize %></th>
+      <th scope="col"><%= 'current_sign_in_at'.humanize %></th>
+      <th scope="col"><%= 'last_sign_in_at'.humanize %></th>
+      <th scope="col"><%= 'current_sign_in_ip'.humanize %></th>
+      <th scope="col"><%= 'last_sign_in_ip'.humanize %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <td><%= user.email %></td>
+        <td><%= user.created_at %></td>
+        <td><%= user.sign_in_count %></td>
+        <td><%= user.current_sign_in_at %></td>
+        <td><%= user.last_sign_in_at %></td>
+        <td><%= user.current_sign_in_ip %></td>
+        <td><%= user.last_sign_in_ip %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

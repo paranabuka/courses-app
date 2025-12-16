@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def to_s
     email
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[email]
+  end
 end
