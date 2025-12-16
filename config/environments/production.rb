@@ -62,6 +62,19 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "courses_app_production"
 
+  # Action Mailer Configuration
+  config.action_mailer.default_url_options = { host: ENV["APPLICATION_HOST_URL"], protocol: 'https' }
+
+  # SMTP settings for action mailer
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_SERVER_ADDRESS"],
+    port: 587,
+    user_name: ENV["SMTP_CREDENTIALS_USERNAME"],
+    password: ENV["SMTP_CREDENTIALS_PASSWORD"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
