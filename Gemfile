@@ -42,8 +42,10 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 4.2.1'
-  # Used on ERB formatting
-  gem 'htmlbeautifier'
+  # Linting and code formatting
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   # Local email viwer for development
   gem 'letter_opener'
 end
@@ -66,4 +68,4 @@ gem 'friendly_id', '~> 5.5.0'
 gem 'ransack'
 gem 'public_activity'
 gem 'rolify'
-gem "pundit", "~> 2.5"
+gem 'pundit', '~> 2.5'

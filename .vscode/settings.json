@@ -1,10 +1,21 @@
 {
-    // ERB files config
-    "files.associations": {
-        "*.html.erb": "erb"
-    },
-    "[erb]": {
-        "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
-        "editor.formatOnSave": true
-    }
+  // Ruby
+  "[ruby]": {
+    "editor.defaultFormatter": "rubocop.vscode-rubocop",
+    "editor.formatOnSave": true
+  },
+  // Rubocop
+  "rubocop.safeAutocorrect": true,
+  // ERB files
+  "files.associations": {
+    "*.html.erb": "erb"
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "elia.erb-formatter",
+    "editor.formatOnSave": true
+  },
+  "emmet.includeLanguages": {
+    "erb": "html"
+  },
+  "erb-formatter.lineLength": 120
 }
