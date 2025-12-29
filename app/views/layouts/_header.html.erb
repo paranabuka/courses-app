@@ -22,15 +22,17 @@
           Users
         <% end %>
       </ul>
-      <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
-        <div class="input-group">
-          <%= f.search_field :title_or_short_description_cont, class: "form-control form-control-sm", style: 'float: left; width 150px;', placeholder: "Find a course", autocomplete: 'off' %>
-          <span class="input-group-append">
-            <button class="btn btn-primary btn-sm" type="submit">
-              <span class="fa fa-search", aria-hidden="true"></span>
-            </button>
-          </span>
-        </div>
+      <% if current_user %>
+        <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
+          <div class="input-group">
+            <%= f.search_field :title_or_short_description_cont, class: "form-control form-control-sm", style: 'float: left; width 150px;', placeholder: "Find a course", autocomplete: 'off' %>
+            <span class="input-group-append">
+              <button class="btn btn-primary btn-sm" type="submit">
+                <span class="fa fa-search", aria-hidden="true"></span>
+              </button>
+            </span>
+          </div>
+        <% end %>
       <% end %>
       <ul class="navbar-nav ms-auto">
         <% if current_user %>

@@ -3,12 +3,14 @@
     What do you want to learn today?
   </div>
   <div class="p-4"></div>
-  <form class="d-flex" role="search">
-    <%= form_tag courses_path, method: :get do %>
-      <%= text_field_tag :title, params[:title], autocomplete: 'off', class: 'form-control me-2', placeholder: 'Search', aria_label: 'Search' %>
-      <button class="btn btn-outline-success" type="submit">Search</button>
+  <% if current_user %>
+    <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
+      <div class="d-flex">
+        <%= f.search_field :title_or_short_description_cont, class: "form-control me-2", placeholder: "Find a course", aria_label: 'Search', autocomplete: 'off' %>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
     <% end %>
-  </form>
+  <% end %>
 </div>
 
 <div class="card-group">
