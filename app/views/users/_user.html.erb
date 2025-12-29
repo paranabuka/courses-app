@@ -31,5 +31,10 @@
         <span class="badge text-bg-danger">No</span>
       <% end %>
     </div>
+    <div class="card-footer">
+      <% user.roles.each do |role| %>
+        <span class="badge bg-info"><%= role.name %></span>
+      <% end %>
+    </div>
   </div>
 </div>

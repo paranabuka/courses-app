@@ -11,6 +11,9 @@ user = User.create!(
   password_confirmation: 'qwerty123'
 )
 
+user.add_role(:admin) unless user.has_role?(:admin)
+user.add_role(:instructor) unless user.has_role?(:instructor)
+
 30.times do
   Course.create!(
     title: Faker::Educator.course_name,
