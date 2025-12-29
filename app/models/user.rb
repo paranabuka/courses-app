@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :courses
 
+  extend FriendlyId
+  friendly_id :email, use: :slugged
+
   after_create :assign_default_role
 
   validate :must_have_at_least_one_role, on: :update
