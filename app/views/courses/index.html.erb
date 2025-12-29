@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Courses: <%= @courses.size %></h1>
+<h3>
+  <div class="text-center">
+    Courses
+    <span class="badge bg-info"><%= @courses.count %></span>
+  </div>
+</h3>
 
-<%= link_to new_course_path do %>
-  <i class="fa-solid fa-square-plus"></i>
-  New Course
-<% end %>
+<p></p>
 
 <div class="row">
   <div class="col-md-2">
@@ -26,6 +28,13 @@
       <%= link_to courses_path, class: "btn btn-sm" do %>
         <i class="fa-solid fa-rotate"></i>
       <% end %>
+    <% end %>
+
+    <hr>
+
+    <%= link_to new_course_path do %>
+      <i class="fa-solid fa-square-plus"></i>
+      New Course
     <% end %>
   </div>
   <div class="col-md-10">

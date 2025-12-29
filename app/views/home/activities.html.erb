@@ -1,13 +1,22 @@
-<h1>Activities</h1>
-
-<% @activities.each do |activity| %>
-  <div class="row">
-    <%= activity.id %>
-    <%= activity.trackable_type %>
-    <%= activity.trackable_id %>
-    <%= link_to activity.trackable, activity.trackable %>
-    <%= activity.key %>
-    <%= activity.parameters %>
-    <%= activity.owner %>
+<h3>
+  <div class="text-center">
+    Activities
+    <span class="badge bg-info"><%= @activities.count %></span>
   </div>
-<% end %>
+</h3>
+
+<p></p>
+
+<ul class="list-group">
+  <% @activities.each do |activity| %>
+    <li class="list-group-item">
+      <%= activity.id %>
+      <%= activity.trackable_type %>
+      <%= activity.trackable_id %>
+      <%= link_to activity.trackable, activity.trackable %>
+      <%= activity.key %>
+      <%= activity.parameters %>
+      <%= activity.owner %>
+    </li>
+  <% end %>
+</ul>
