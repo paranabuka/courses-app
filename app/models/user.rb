@@ -26,11 +26,15 @@ class User < ApplicationRecord
     %w[email]
   end
 
-  def assign_default_role
-    add_role(:student) if roles.blank?
+  def online?
+    updated_at > 2.minutes.ago
   end
 
   private
+
+  def assign_default_role
+    add_role(:student) if roles.blank?
+  end
 
   def must_have_at_least_one_role
     errors.add(:roles, 'must have at least one role assigned') if roles.blank?

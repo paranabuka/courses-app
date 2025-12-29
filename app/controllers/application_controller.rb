@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
+  after_action :user_activity
+
   include PublicActivity::StoreController
   include Pundit::Authorization
 
@@ -17,5 +19,9 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(root_path)
+  end
+
+  def user_activity
+    current_user.try :touch
   end
 end
