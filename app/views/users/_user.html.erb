@@ -35,7 +35,7 @@
       <% user.roles.each do |role| %>
         <span class="badge bg-info"><%= role.name %></span>
       <% end %>
-      <%= link_to 'Edit roles', edit_user_path(user), class: "btn btn-sm btn-warning text-dark" %>
+      <%= link_to 'Edit roles', edit_user_path(user), class: "btn btn-sm btn-warning text-dark" if policy(user).edit? %>
     </div>
   </div>
 </div>

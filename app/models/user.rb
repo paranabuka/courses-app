@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  validate :must_have_at_least_one_role, on: :update
+
   def to_s
     email
   end
@@ -17,11 +19,17 @@ class User < ApplicationRecord
     email.split('@').first
   end
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[email]
   end
 
   def assign_default_role
-    self.add_role(:student) if self.roles.blank?
+    add_role(:student) if roles.blank?
+  end
+
+  private
+
+  def must_have_at_least_one_role
+    errors.add(:roles, 'must have at least one role assigned') if roles.blank?
   end
 end
