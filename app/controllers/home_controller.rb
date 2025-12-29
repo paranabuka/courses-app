@@ -6,4 +6,8 @@ class HomeController < ApplicationController
     @top_rated_courses = Course.all.limit(3)
     @most_recent_courses = Course.all.limit(3).order(created_at: :desc)
   end
+
+  def activities
+    @activities = PublicActivity::Activity.all
+  end
 end

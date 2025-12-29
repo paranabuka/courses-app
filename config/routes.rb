@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get 'activities', to: 'home#activities'
+
   devise_for :users
 
   resources :users, only: [:index]

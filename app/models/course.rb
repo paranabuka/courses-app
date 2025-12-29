@@ -9,6 +9,9 @@ class Course < ApplicationRecord
 
   has_rich_text :description
 
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+
   def to_s
     title
   end

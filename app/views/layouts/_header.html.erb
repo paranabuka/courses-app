@@ -34,6 +34,10 @@
       <% end %>
       <ul class="navbar-nav ms-auto">
         <% if current_user %>
+          <%= link_to activities_path, class: "nav-link #{'active fw-bold' if current_page?(activities_path)}" do %>
+            <div class="fa-solid fa-bell"></div>
+            Activities
+          <% end %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa fa-user"></div>
