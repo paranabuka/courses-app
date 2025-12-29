@@ -1,0 +1,10 @@
+{
+    // ERB files config
+    "files.associations": {
+        "*.html.erb": "erb"
+    },
+    "[erb]": {
+        "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+        "editor.formatOnSave": true
+    }
+}
