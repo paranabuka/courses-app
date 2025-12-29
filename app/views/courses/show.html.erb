@@ -1,6 +1,13 @@
 <%= link_to 'Courses', courses_path %> /
 <%= link_to @course.title, course_path(@course) %>
-
 <p></p>
-
-<%= render partial: "course", locals: { course: @course } %>
+<div class="row">
+  <div class="col-lg-6">
+    <%= render partial: "course", locals: { course: @course } %>
+  </div>
+  <div class="col-lg-6">
+    <% @lessons.each do |lesson| %>
+      <%= render partial: "lessons/lesson", locals: { lesson: lesson } %>
+    <% end %>
+  </div>
+</div>
