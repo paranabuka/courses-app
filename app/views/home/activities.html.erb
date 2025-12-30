@@ -1,19 +1,24 @@
+<% content_for :title do %>
+  Activities
+<% end %>
 <h3>
   <div class="text-center">
     Activities
     <span class="badge bg-info"><%= @activities.count %></span>
   </div>
 </h3>
-
 <p></p>
-
 <ul class="list-group">
   <% @activities.each do |activity| %>
     <li class="list-group-item">
       <%= activity.id %>
       <%= activity.trackable_type %>
       <%= activity.trackable_id %>
-      <%= link_to activity.trackable, activity.trackable %>
+      <% if activity.trackable %>
+        <%= link_to activity.trackable, activity_path(activity) %>
+      <% else %>
+        [Deleted]
+      <% end %>
       <%= activity.key %>
       <%= activity.parameters %>
       <%= activity.owner %>
