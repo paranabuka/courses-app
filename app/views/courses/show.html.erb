@@ -3,12 +3,13 @@
 <p></p>
 <div class="row">
   <div class="col-lg-6">
-    <%= render partial: "course", locals: { course: @course } %>
+    <%= render partial: 'course', locals: { course: @course } %>
   </div>
   <div class="col-lg-6">
     <%= link_to 'Add lesson', new_lesson_path(course_id: @course.id) %>
     <% @lessons.each do |lesson| %>
-      <%= render partial: "lessons/lesson", locals: { lesson: lesson } %>
+      <%= render partial: 'lessons/lesson', locals: { lesson: lesson } %>
+      <p/>
     <% end %>
   </div>
 </div>

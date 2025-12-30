@@ -2,9 +2,9 @@
   <div class="card-header">
     <i class="fas fa-user"></i>
     <% if user.online? %>
-      <i class="text-success fa fa-circle"></i>
+      <i class="text-success fa-solid fa-circle"></i>
     <% else %>
-      <i class="text-secondary fa fa-circle"></i>
+      <i class="text-danger fa-regular fa-circle"></i>
     <% end %>
     <%= link_to user.email, user_path(user) %>
   </div>
