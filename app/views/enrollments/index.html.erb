@@ -1,0 +1,40 @@
+<% content_for :title do %>
+  Enrollments
+<% end %>
+<h3>
+  <div class="text-center">
+    Enrollments
+    <span class="badge bg-info"><%= @enrollments.count %></span>
+  </div>
+</h3>
+<p></p>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>User</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Price</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @enrollments.each do |enrollment| %>
+        <tr>
+          <td><%= enrollment.course_id %></td>
+          <td><%= enrollment.user_id %></td>
+          <td><%= enrollment.rating %></td>
+          <td><%= enrollment.review %></td>
+          <td><%= number_to_currency(enrollment.price) %></td>
+          <td><%= link_to 'Show', enrollment %></td>
+          <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
+          <td><%= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<%= link_to 'New Enrollment', new_enrollment_path %>
