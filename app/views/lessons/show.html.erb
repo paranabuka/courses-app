@@ -1,2 +1,6 @@
+<%= link_to 'Courses', courses_path %> /
+<%= link_to @lesson.course.title, course_path(@lesson.course) %> /
+<%= link_to @lesson.title, lesson_path(@lesson) %>
+<p></p>
 <%= render partial: "lesson", locals: { lesson: @lesson } %>
 <%= link_to 'Back to course', course_path(@lesson.course) %>
