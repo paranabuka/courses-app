@@ -8,65 +8,73 @@
   </div>
 </h3>
 <div class="d-grid gap-3 mt-4">
-  <div class="form-inline">
+  <div class="col-3">
     <%= search_form_for @q do |f| %>
-      <%= f.search_field :email_cont, placeholder: "Email" %>
-      <%= f.submit %>
-      <%= link_to users_path, class: "btn btn-sm" do %>
-        <i class="fa-solid fa-rotate"></i>
-      <% end %>
+      <div class="input-group">
+        <%= f.search_field :email_cont, placeholder: "Email", class: "form-control form-control-sm", autocomplete: 'off' %>
+        <span class="input-group-append">
+          <button class="btn btn-primary btn-sm" type="submit">
+            <span class="fa fa-search", aria-hidden="true"></span>
+          </button>
+        </span>
+        <%= link_to users_path, class: "btn btn-sm" do %>
+          <i class="fa-solid fa-rotate"></i>
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col"><%= sort_link(@q, :id) %></th>
-        <th scope="col"><%= sort_link(@q, :email) %></th>
-        <th scope="col"><%= 'created_at'.humanize %></th>
-        <th scope="col"><%= 'sign_in_count'.humanize %></th>
-        <th scope="col"><%= 'current_sign_in_at'.humanize %></th>
-        <th scope="col"><%= 'current_sign_in_ip'.humanize %></th>
-        <th class="col">Confirmed?</th>
-        <th class="col">Roles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
         <tr>
-          <th scope="row"><%= user.id %></th>
-          <td>
-            <% if user.online? %>
-              <i class="text-success fa-solid fa-circle"></i>
-            <% else %>
-              <i class="text-danger fa-regular fa-circle"></i>
-            <% end %>
-            <%= link_to user.email, user_path(user) %>
-          </td>
-          <td><%= user.created_at %></td>
-          <td><%= user.sign_in_count %></td>
-          <td><%= user.current_sign_in_at %></td>
-          <td><%= user.current_sign_in_ip %></td>
-          <td>
-            <% if user.confirmed_at.present? %>
-              <span class="badge text-bg-success">Yes</span>
-            <% else %>
-              <span class="badge text-bg-danger">No</span>
-            <% end %>
-          </td>
-          <td>
-            <div class="d-grid gap-2">
-              <div>
-                <% user.roles.each do |role| %>
-                  <span class="badge bg-info"><%= role.name %></span>
-                <% end %>
-              </div>
-              <div>
-                <%= link_to 'Edit roles', edit_user_path(user), class: "btn btn-sm btn-warning text-dark" if policy(user).edit? %>
-              </div>
-            </div>
-          </td>
+          <th scope="col"><%= sort_link(@q, :id) %></th>
+          <th scope="col"><%= sort_link(@q, :email) %></th>
+          <th scope="col"><%= 'created_at'.humanize %></th>
+          <th scope="col"><%= 'sign_in_count'.humanize %></th>
+          <th scope="col"><%= 'current_sign_in_at'.humanize %></th>
+          <th scope="col"><%= 'current_sign_in_ip'.humanize %></th>
+          <th class="col">Confirmed?</th>
+          <th class="col">Roles</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <th scope="row"><%= user.id %></th>
+            <td>
+              <% if user.online? %>
+                <i class="text-success fa-solid fa-circle"></i>
+              <% else %>
+                <i class="text-danger fa-regular fa-circle"></i>
+              <% end %>
+              <%= link_to user.email, user_path(user) %>
+            </td>
+            <td><%= user.created_at %></td>
+            <td><%= user.sign_in_count %></td>
+            <td><%= user.current_sign_in_at %></td>
+            <td><%= user.current_sign_in_ip %></td>
+            <td>
+              <% if user.confirmed_at.present? %>
+                <span class="badge text-bg-success">Yes</span>
+              <% else %>
+                <span class="badge text-bg-danger">No</span>
+              <% end %>
+            </td>
+            <td>
+              <div class="d-grid gap-2">
+                <div>
+                  <% user.roles.each do |role| %>
+                    <span class="badge bg-info"><%= role.name %></span>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to 'Edit roles', edit_user_path(user), class: "btn btn-sm btn-warning text-dark" if policy(user).edit? %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
