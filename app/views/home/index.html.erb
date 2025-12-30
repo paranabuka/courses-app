@@ -1,3 +1,6 @@
+<% content_for :title do %>
+  Learn anything, on your schedule
+<% end %>
 <div class="container-fluid text-lg-left p-5 bg-light">
   <div class="display-4">
     What do you want to learn today?
@@ -12,12 +15,11 @@
     <% end %>
   <% end %>
 </div>
-
 <div class="card-group">
   <div class="card card-body">
     <h1>
       <i class="fa-solid fa-graduation-cap"></i>
-      </h1>
+    </h1>
     <%= Course.count %>
     online courses
     <div class="row"></div>
@@ -50,7 +52,6 @@
     Learn on your schedule
   </div>
 </div>
-
 <hr>
 <h3>Popular Courses</h3>
 <div class="container my-4">

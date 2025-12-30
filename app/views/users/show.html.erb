@@ -1,1 +1,4 @@
+<% content_for :title do %>
+  <%= @user.username %>
+<% end %>
 <%= render partial: 'user', locals: { user: @user } %>
