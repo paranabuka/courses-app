@@ -1,11 +1,23 @@
-<div class="card">
-  <div class="card-header">
-    <h1>New Lesson</h1>
+<div class="d-grid gap-3">
+  <div>
+    <%= link_to 'Courses', courses_path %> /
+    <%= link_to @course.title, course_path(@course) %> /
+    New lesson
   </div>
-  <div class="card-body">
-    <%= render 'form', lesson: @lesson %>
-  </div>
-  <div class="card-footer">
-    <%= link_to 'Back', course_path(@course) %>
+  <div>
+    <div class="card">
+      <div class="card-header">
+        <h3>
+          <i class="fa-regular fa-square-check"></i>
+          New Lesson
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= render 'form', lesson: @lesson %>
+      </div>
+      <div class="card-footer">
+        <%= link_to 'Back', course_path(@course) %>
+      </div>
+    </div>
   </div>
 </div>

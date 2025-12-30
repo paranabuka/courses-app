@@ -1,11 +1,11 @@
 <div class="card">
   <div class="card-header">
+    <i class="fa-regular fa-square-check"></i>
     <%= link_to lesson.title, course_lesson_path(@course, lesson) %>
   </div>
   <% if policy(lesson).show? %>
     <div class="card-body">
       <%= lesson.content %>
-      <%= lesson.course %>
     </div>
     <% if policy(lesson).edit? %>
       <div class="card-footer">

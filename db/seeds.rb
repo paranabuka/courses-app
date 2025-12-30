@@ -5,15 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(
+user = User.new(
   email: 'admin@example.com',
   password: 'qwerty123',
   password_confirmation: 'qwerty123'
 )
+user.skip_confirmation!
+user.save!
 
 user.add_role(:admin) unless user.has_role?(:admin)
 user.add_role(:instructor) unless user.has_role?(:instructor)
 
+PublicActivity.enabled = false
 30.times do
   Course.create!(
     title: Faker::Educator.course_name,
@@ -21,7 +24,8 @@ user.add_role(:instructor) unless user.has_role?(:instructor)
     short_description: Faker::Lorem.paragraph(sentence_count: 1),
     language: Course::LANGUAGES.sample,
     level: Course::LEVELS.sample,
-    price: Faker::Number.between(from: 1000, to: 20000),
+    price: Faker::Number.between(from: 1000, to: 20_000),
     user_id: user.id
   )
 end
+PublicActivity.enabled = true
