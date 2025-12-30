@@ -16,17 +16,17 @@ class LessonPolicy < ApplicationPolicy
     @user.has_role?(:admin) || @record.course.user_id == @user.id
   end
 
-  # def new?
-  #   @user.has_role? :instructor
-  # end
+  def new?
+    true
+  end
 
   def edit?
     @user.has_role?(:instructor) && @record.course.user_id == @user.id
   end
 
-  # def create?
-  #   @user.has_role? :instructor
-  # end
+  def create?
+    @user.has_role?(:instructor) && @record.course.user_id == @user.id
+  end
 
   def update?
     @user.has_role?(:instructor) && @record.course.user_id == @user.id
