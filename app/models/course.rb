@@ -35,4 +35,12 @@ class Course < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[user]
   end
+
+  def owned_by?(user)
+    user.id == user_id
+  end
+
+  def already_enrolled?(user)
+    enrollments.exists?(course_id: id, user_id: user.id)
+  end
 end

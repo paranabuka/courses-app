@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[new create]
 
   # GET /enrollments or /enrollments.json
   def index
@@ -21,18 +22,8 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    @enrollment = Enrollment.new(enrollment_params)
-    @enrollment.price = @enrollment.course.price
-
-    respond_to do |format|
-      if @enrollment.save
-        format.html { redirect_to @enrollment, notice: 'Enrollment was successfully created.' }
-        format.json { render :show, status: :created, location: @enrollment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-      end
-    end
+    @enrollment = @current_user.enroll_in(@course)
+    redirect_to course_path(@course), notice: 'You have successfully enrolled in the course.'
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json
@@ -65,8 +56,12 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.find(params[:id])
   end
 
+  def set_course
+    @course = Course.friendly.find(params[:course_id])
+  end
+
   # Only allow a list of trusted parameters through.
   def enrollment_params
-    params.require(:enrollment).permit(:course_id, :user_id, :rating, :review)
+    params.require(:enrollment).permit(:rating, :review)
   end
 end

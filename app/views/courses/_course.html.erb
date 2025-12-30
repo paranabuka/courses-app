@@ -9,8 +9,8 @@
       <i class="fa-solid fa-list-check"></i>
       <%= course.lessons.count %>
     </div>
-    <div class="card-footer">
-      <%= number_to_currency(course.price) %>
+    <div class="card-footer text-center">
+      <%= enroll_in(course) %>
     </div>
     <div class="card-footer d-flex">
       <div class="flex-grow-1">
