@@ -8,10 +8,21 @@ module CoursesHelper
     free_enrollment(course)
   end
 
+  def review(course)
+    return unless current_user && course.already_enrolled?(current_user)
+
+    enrollment = course.enrollments.find_by(user_id: current_user.id)
+
+    return unless enrollment
+    return add_review(enrollment) unless enrollment.rating.present?
+
+    see_review(enrollment)
+  end
+
   private
 
   def check_price(course)
-    link_to 'Check price', course_path(course), class: 'btn btn-success btn-md'
+    link_to 'Check price', course_path(course), class: 'btn btn-success btn-md text-light'
   end
 
   def view_analytics(course)
@@ -19,7 +30,7 @@ module CoursesHelper
   end
 
   def keep_learning(course)
-    link_to 'You already enrolled in this course. Keep learning', course_path(course)
+    link_to 'Keep learning', course_path(course)
   end
 
   def proceed_to_payment(course)
@@ -28,5 +39,13 @@ module CoursesHelper
 
   def free_enrollment(course)
     link_to 'Free', new_course_enrollment_path(course), class: 'btn btn-success text-light'
+  end
+
+  def add_review(enrollment)
+    link_to 'Add review', edit_enrollment_path(enrollment)
+  end
+
+  def see_review(enrollment)
+    link_to 'See review', enrollment
   end
 end
