@@ -13,7 +13,9 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def show?
-    @user.has_role?(:admin) || @record.course.user_id == @user.id
+    @user.has_role?(:admin) ||
+      @record.course.user_id == @user.id ||
+      @record.course.already_enrolled?(@user)
   end
 
   def new?

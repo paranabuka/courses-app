@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class EnrollmentPolicy < ApplicationPolicy
   # NOTE: Up to Pundit v2.3.1, the inheritance was declared as
   # `Scope < Scope` rather than `Scope < ApplicationPolicy::Scope`.
   # In most cases the behavior will be identical, but if updating existing
@@ -17,10 +17,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    @user.has_role?(:admin)
+    @record.user_id == @user.id
   end
 
   def update?
+    @record.user_id == @user.id
+  end
+
+  def destroy?
     @user.has_role?(:admin)
   end
 end
