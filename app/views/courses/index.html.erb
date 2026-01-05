@@ -10,7 +10,7 @@
 <p></p>
 <div class="row">
   <div class="col-md-2">
-    <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
+    <%= search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f| %>
       <%= f.label :title %>
       <%= f.search_field :title_cont, placeholder: "Title", class: "form-control form-control-sm" %>
       <%= f.label :description %>
@@ -24,14 +24,9 @@
       <%= f.label :instructor %>
       <%= f.search_field :user_email_cont, placeholder: "Instructor", class: "form-control form-control-sm" %>
       <%= f.submit %>
-      <%= link_to courses_path, class: "btn btn-sm" do %>
+      <%= link_to @ransack_path, class: "btn btn-sm" do %>
         <i class="fa-solid fa-rotate"></i>
       <% end %>
-    <% end %>
-    <hr>
-    <%= link_to new_course_path do %>
-      <i class="fa-solid fa-square-plus"></i>
-      New Course
     <% end %>
   </div>
   <div class="col-md-10">

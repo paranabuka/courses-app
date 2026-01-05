@@ -9,7 +9,7 @@
 </h3>
 <div class="d-grid gap-3 mt-4">
   <div class="col-8">
-    <%= search_form_for @q do |f| %>
+    <%= search_form_for @q, url: @ransack_path do |f| %>
       <div class="input-group gap-2">
         <%= f.search_field :user_email_cont, placeholder: "User", class: "form-control form-control-sm", autocomplete: 'off' %>
         <%= f.search_field :course_title_cont, placeholder: "Course", class: "form-control form-control-sm", autocomplete: 'off' %>
@@ -20,7 +20,7 @@
             <span class="fa fa-search", aria-hidden="true"></span>
           </button>
         </span>
-        <%= link_to enrollments_path, class: "btn btn-sm" do %>
+        <%= link_to @ransack_path, class: "btn btn-sm" do %>
           <i class="fa-solid fa-rotate"></i>
         <% end %>
       </div>

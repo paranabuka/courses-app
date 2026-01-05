@@ -15,6 +15,8 @@ class Enrollment < ApplicationRecord
   extend FriendlyId
   friendly_id :to_s, use: :slugged
 
+  scope :pending_review, -> { where(rating: [0, nil], review: ['', nil]) }
+
   def to_s
     "#{user} #{course}"
   end

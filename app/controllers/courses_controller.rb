@@ -3,8 +3,33 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
+    @ransack_path = courses_path
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+  end
+
+  def my_enrolled
+    @ransack_path = my_enrolled_courses_path
+    @q = Course.joins(:enrollments).where(enrollments: { user_id: current_user.id })
+    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render :index
+  end
+
+  def my_pending_review
+    @ransack_path = my_pending_review_courses_path
+    @q = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user_id: current_user.id))
+    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render :index
+  end
+
+  def my_created
+    @ransack_path = my_created_courses_path
+    @q = Course.where(user_id: current_user.id)
+    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render :index
   end
 
   # GET /courses/1 or /courses/1.json

@@ -17,33 +17,83 @@
           <div class="fa-solid fa-graduation-cap"></div>
           Courses
         <% end %>
-        <%= link_to users_path, class: "nav-link #{'active fw-bold' if current_page?(users_path)}" do %>
-          <div class="fa fa-users"></div>
-          Users
+        <% if current_user %>
+          <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
+            <div class="input-group">
+              <%= f.search_field :title_or_short_description_cont, class: "form-control form-control-sm", style: 'float: left; width 150px;', placeholder: "Find a course", autocomplete: 'off' %>
+              <span class="input-group-append">
+                <button class="btn btn-primary btn-sm" type="submit">
+                  <span class="fa fa-search", aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
+          <% end %>
         <% end %>
-        <%= link_to enrollments_path, class: "nav-link #{'active fw-bold' if current_page?(enrollments_path)}" do %>
-          <div class="fa-solid fa-lock-open"></div>
-          Enrollments
+        <% if current_user&.has_role?(:student) %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="fa-solid fa-user-graduate"></div>
+              <b>Learn</b>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="studentDropdown">
+              <%= link_to my_enrolled_courses_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-graduation-cap"></div>
+                My Learning
+              <% end %>
+              <%= link_to my_pending_review_courses_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-star"></div>
+                Pending review
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% if current_user&.has_role?(:instructor) %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="instructorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="fa-solid fa-chalkboard-user"></div>
+              <b>Teach</b>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="instructorDropdown">
+              <%= link_to new_course_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-square-plus"></div>
+                New Course
+              <% end %>
+              <%= link_to my_created_courses_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-chalkboard-user"></div>
+                My Courses
+              <% end %>
+              <%= link_to my_students_enrollments_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-user-group"></div>
+                My Students
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% if current_user&.has_role?(:admin) %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="fa-solid fa-gear"></div>
+              <b>Admin</b>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+              <%= link_to users_path, class: "dropdown-item" do %>
+                <div class="fa fa-users"></div>
+                Users
+              <% end %>
+              <%= link_to enrollments_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-lock-open"></div>
+                Enrollments
+              <% end %>
+              <%= link_to activities_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-bell"></div>
+                Activities
+              <% end %>
+            </ul>
+          </li>
         <% end %>
       </ul>
-      <% if current_user %>
-        <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
-          <div class="input-group">
-            <%= f.search_field :title_or_short_description_cont, class: "form-control form-control-sm", style: 'float: left; width 150px;', placeholder: "Find a course", autocomplete: 'off' %>
-            <span class="input-group-append">
-              <button class="btn btn-primary btn-sm" type="submit">
-                <span class="fa fa-search", aria-hidden="true"></span>
-              </button>
-            </span>
-          </div>
-        <% end %>
-      <% end %>
       <ul class="navbar-nav ms-auto">
         <% if current_user %>
-          <%= link_to activities_path, class: "nav-link #{'active fw-bold' if current_page?(activities_path)}" do %>
-            <div class="fa-solid fa-bell"></div>
-            Activities
-          <% end %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa fa-user"></div>
