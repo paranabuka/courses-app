@@ -9,6 +9,9 @@ class Enrollment < ApplicationRecord
 
   validate :user_cannot_be_course_owner
 
+  extend FriendlyId
+  friendly_id :to_s, use: :slugged
+
   def to_s
     "#{user} #{course}"
   end
