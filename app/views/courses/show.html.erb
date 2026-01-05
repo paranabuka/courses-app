@@ -10,7 +10,7 @@
   </div>
   <div class="col-lg-6">
     <div class="d-grid gap-2">
-      <%= link_to 'Add lesson', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block text-light' %>
+      <%= link_to 'Add lesson', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block text-light' if policy(@course).owner? %>
       <% @lessons.each do |lesson| %>
         <%= render partial: 'lessons/lesson', locals: { lesson: lesson } %>
       <% end %>
