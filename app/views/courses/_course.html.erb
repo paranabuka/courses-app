@@ -10,10 +10,14 @@
       <b>
         <%= course.average_rating %>
       </b>
+      (
+      <i class="fa-solid fa-user-graduate"></i>
+      <%= course.enrollments_count %>
+      )
     </div>
     <div class="card-footer">
       <i class="fa-solid fa-list-check"></i>
-      <%= course.lessons.count %>
+      <%= course.lessons_count %>
     </div>
     <div class="card-footer text-center">
       <%= enroll_in(course) %>

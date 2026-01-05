@@ -30,6 +30,12 @@
     <%= user.last_sign_in_ip %>
   </div>
   <div class="card-footer">
+    Courses created:
+    <%= user.courses_count %>
+    Enrollments:
+    <%= user.enrollments_count %>
+  </div>
+  <div class="card-footer">
     Confirmed email?
     <% if user.confirmed_at.present? %>
       <span class="badge text-bg-success">Yes</span>

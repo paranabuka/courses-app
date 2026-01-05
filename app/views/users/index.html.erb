@@ -33,6 +33,8 @@
           <th scope="col"><%= 'sign_in_count'.humanize %></th>
           <th scope="col"><%= 'current_sign_in_at'.humanize %></th>
           <th scope="col"><%= 'current_sign_in_ip'.humanize %></th>
+          <th scope="col">Courses</th>
+          <th scope="col">Enrollments</th>
           <th class="col">Confirmed?</th>
           <th class="col">Roles</th>
         </tr>
@@ -53,6 +55,8 @@
             <td><%= user.sign_in_count %></td>
             <td><%= user.current_sign_in_at %></td>
             <td><%= user.current_sign_in_ip %></td>
+            <td><%= user.courses_count %></td>
+            <td><%= user.enrollments_count %></td>
             <td>
               <% if user.confirmed_at.present? %>
                 <span class="badge text-bg-success">Yes</span>
