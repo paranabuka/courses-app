@@ -43,4 +43,13 @@ class Course < ApplicationRecord
   def already_enrolled?(user)
     enrollments.exists?(course_id: id, user_id: user.id)
   end
+
+  def update_average_rating
+    if enrollments.rated.any?
+      avg = enrollments.rated.average(:rating).to_f.round(2)
+      update(average_rating: avg)
+    else
+      update(average_rating: 0)
+    end
+  end
 end

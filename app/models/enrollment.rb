@@ -16,6 +16,7 @@ class Enrollment < ApplicationRecord
   friendly_id :to_s, use: :slugged
 
   scope :pending_review, -> { where(rating: [0, nil], review: ['', nil]) }
+  scope :rated, -> { where.not(rating: [0, nil]) }
 
   def to_s
     "#{user} #{course}"
@@ -27,6 +28,14 @@ class Enrollment < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     %w[user course]
+  end
+
+  after_save do
+    course.update_average_rating unless rating.nil? || rating.zero?
+  end
+
+  after_destroy do
+    course.update_average_rating
   end
 
   protected
