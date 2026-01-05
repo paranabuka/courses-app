@@ -16,6 +16,14 @@ class Enrollment < ApplicationRecord
     "#{user} #{course}"
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[review rating]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[user course]
+  end
+
   protected
 
   def user_cannot_be_course_owner
