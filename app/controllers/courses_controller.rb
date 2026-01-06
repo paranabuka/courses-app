@@ -35,6 +35,7 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     @lessons = @course.lessons
+    @recent_reviews = @course.enrollments.reviewed.top_rated.recently_updated.limit(3)
   end
 
   # GET /courses/new

@@ -1,50 +1,39 @@
 <div class="card">
-  <div class="card-body">
-    <h5 class="card-title">
-      <i class="fa-solid fa-graduation-cap"></i>
-      <%= link_to course.title, course %>
-    </h5>
-    <p class="card-text">
-      <%= course.short_description %>
-    </p>
-    <div class="card-footer d-flex">
-      <div class="flex-grow-1">
-        <i class="text-warning fa-solid fa-star"></i>
-        <b>
-          <%= course.average_rating %>
-        </b>
-        (
-        <i class="fa-solid fa-user-graduate"></i>
-        <%= course.enrollments_count %>
-        )
-        <i class="fa-solid fa-list-check"></i>
-        <%= pluralize(course.lessons_count, 'lesson') %>
-      </div>
-      <div>
-        <i class="fa-solid fa-chalkboard-user"></i>
-        <%= link_to course.user.username, user_path(course.user) %>
-      </div>
-    </div>
-    <div class="card-footer d-flex">
-      <div class="flex-grow-1">
-        <i class="fa-solid fa-earth-africa"></i>
-        <%= course.language %>
-      </div>
-      <div>
-        <i class="fa-solid fa-signal"></i>
-        <%= course.level %>
-      </div>
-    </div>
-    <div class="card-footer text-center">
-      <%= enroll_in(course) %>
-      <div class="row"></div>
-      <%= review(course) %>
-    </div>
-    <% if current_user && policy(course).edit? %>
-      <div class="card-footer">
-        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-outline-warning' %>
-        <%= link_to 'Destroy', course, class: 'btn btn-sm btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
+  <div class="card-header">
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= link_to course.title, course %>
   </div>
+  <div class="card-body">
+    <%= course.short_description %>
+  </div>
+  <div class="card-footer text-center">
+    <%= enroll_in(course) %>
+    <div class="row"></div>
+    <%= review(course) %>
+  </div>
+  <div class="card-footer d-flex">
+    <div class="flex-grow-1">
+      <i class="text-warning fa-solid fa-star"></i>
+      <b>
+        <%= course.average_rating %>
+      </b>
+      (
+      <i class="fa-solid fa-user-graduate"></i>
+      <%= course.enrollments_count %>
+      )
+      <i class="fa-solid fa-list-check"></i>
+      <%= pluralize(course.lessons_count, 'lesson') %>
+    </div>
+    <div>
+      <i class="fa-solid fa-chalkboard-user"></i>
+      <%= link_to course.user.username, user_path(course.user) %>
+    </div>
+  </div>
+  <% if current_user && policy(course).edit? %>
+    <div class="card-footer">
+      <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' if policy(course).owner? %>
+      <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' %>
+      <%= link_to 'Destroy', course, class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
 </div>
