@@ -1,10 +1,12 @@
 class Course < ApplicationRecord
-  validates :title, :short_description, :language, :level, :price, presence: true
-  validates :description, presence: true, length: { minimum: 5 }
-
   belongs_to :user, counter_cache: true
+
   has_many :lessons, dependent: :destroy
   has_many :enrollments
+
+  validates :title, :short_description, :language, :level, :price, presence: true
+  validates :title, uniqueness: true
+  validates :description, presence: true, length: { minimum: 5 }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
