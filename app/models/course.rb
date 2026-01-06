@@ -16,6 +16,12 @@ class Course < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, _model) { controller.current_user }
 
+  scope :popular, -> { order(enrollments_count: :desc) }
+  scope :top_rated, -> { order(average_rating: :desc) }
+  scope :most_recent, -> { order(created_at: :desc) }
+  scope :enrolled_by, ->(user) { joins(:enrollments).where(enrollments: { user_id: user.id }) }
+  scope :most_recent_enrolled, -> { order('enrollments.created_at DESC') }
+
   def to_s
     title
   end

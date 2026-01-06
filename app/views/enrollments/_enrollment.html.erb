@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-header">
-    <i class="fa-solid fa-user"></i>
-    <%= link_to enrollment.user, user_path(enrollment.user) %>
+    <% if current_user %>
+      <i class="fa-solid fa-user"></i>
+      <%= link_to enrollment.user, user_path(enrollment.user) %>
+    <% end %>
     <i class="fa-solid fa-graduation-cap"></i>
     <%= link_to enrollment.course, course_path(enrollment.course) %>
     <i class="fa-solid fa-clock"></i>
