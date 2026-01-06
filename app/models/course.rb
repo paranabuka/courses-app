@@ -31,7 +31,7 @@ class Course < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title short_description language level price]
+    %w[title short_description language level price average_rating enrollments_count created_at]
   end
 
   def self.ransackable_associations(_auth_object = nil)
