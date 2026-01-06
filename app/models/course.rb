@@ -3,6 +3,7 @@ class Course < ApplicationRecord
 
   has_many :lessons, dependent: :destroy
   has_many :enrollments
+  has_many :user_lessons, through: :lessons
 
   validates :title, :short_description, :language, :level, :price, presence: true
   validates :title, uniqueness: true
@@ -50,6 +51,12 @@ class Course < ApplicationRecord
 
   def already_enrolled?(user)
     enrollments.exists?(course_id: id, user_id: user.id)
+  end
+
+  def progress(user)
+    return 0.0 if lessons_count.zero?
+
+    user_lessons.where(user: user).count.to_f / lessons_count * 100.0
   end
 
   def update_average_rating

@@ -30,7 +30,9 @@ module CoursesHelper
   end
 
   def keep_learning(course)
-    link_to 'Keep learning', course_path(course)
+    link_to course_path(course) do
+      "#{spinner_icon} #{number_to_percentage(course.progress(current_user), precision: 0)}".html_safe
+    end
   end
 
   def proceed_to_payment(course)
@@ -65,5 +67,9 @@ module CoursesHelper
 
   def review_icon
     content_tag(:i, '', class: 'fa-solid fa-comment')
+  end
+
+  def spinner_icon
+    content_tag(:i, '', class: 'fa-solid fa-spinner')
   end
 end

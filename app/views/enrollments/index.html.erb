@@ -35,7 +35,7 @@
           <th>ID</th>
           <th>
             <i class="fa-solid fa-user"></i>
-            <%= sort_link(@q, :user_email, 'User email') %>
+            <%= sort_link(@q, :user_email, 'User') %>
           </th>
           <th>
             <i class="fa-solid fa-graduation-cap"></i>
@@ -48,6 +48,10 @@
           <th>
             <i class="fa-solid fa-dollar-sign"></i>
             <%= sort_link(@q, :price, 'Price') %>
+          </th>
+          <th>
+            <i class="fa-solid fa-spinner"></i>
+            Progress
           </th>
           <th>
             <i class="text-warning fa-solid fa-star"></i>
@@ -68,16 +72,17 @@
         <% @enrollments.each do |enrollment| %>
           <tr>
             <td><%= enrollment.id %></td>
-            <td><%= link_to enrollment.user, user_path(enrollment.user) %></td>
+            <td><%= link_to enrollment.user.username, user_path(enrollment.user) %></td>
             <td><%= link_to enrollment.course, course_path(enrollment.course) %></td>
             <td><%= enrollment.created_at.strftime("%Y-%m-%d %H:%M") %></td>
             <td><%= number_to_currency(enrollment.price) %></td>
+            <td><%= number_to_percentage(enrollment.course.progress(enrollment.user), precision: 0) %></td>
             <td><%= enrollment.rating %></td>
             <td><%= enrollment.review %></td>
             <td><%= enrollment.updated_at.strftime("%Y-%m-%d %H:%M") if enrollment.rating.present? %></td>
             <td><%= link_to 'See review', enrollment %></td>
-            <td><%= link_to 'Add review', edit_enrollment_path(enrollment) %></td>
-            <td><%= link_to 'Delete enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Add review', edit_enrollment_path(enrollment) if policy(enrollment).edit? %></td>
+            <td><%= link_to 'Delete enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' } if policy(enrollment).destroy? %></td>
           </tr>
         <% end %>
       </tbody>
