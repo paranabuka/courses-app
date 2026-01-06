@@ -1,10 +1,14 @@
 <% content_for :title do %>
-  Courses
+  <%= action_name.humanize %>
+  courses
 <% end %>
 <h3>
   <div class="text-center">
-    Courses
-    <span class="badge bg-info"><%= @courses.count %></span>
+    <%= action_name.humanize %>
+    courses
+    <span class="badge bg-info">
+      <%= @courses.count %>
+    </span>
   </div>
 </h3>
 <p></p>

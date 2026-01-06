@@ -9,11 +9,11 @@ Rails.application.routes.draw do
     resources :lessons
     resources :enrollments, only: [:new, :create]
 
-    get :my_enrolled, :my_pending_review, :my_created, on: :collection
+    get :my_enrolled, :pending_review, :my_created, on: :collection
   end
   
   resources :enrollments do
-    get :my_students, on: :collection
+    get :students, on: :collection
   end
   
   get 'activities', to: 'home#activities'

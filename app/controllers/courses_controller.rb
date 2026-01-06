@@ -16,8 +16,8 @@ class CoursesController < ApplicationController
     render :index
   end
 
-  def my_pending_review
-    @ransack_path = my_pending_review_courses_path
+  def pending_review
+    @ransack_path = pending_review_courses_path
     @q = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user_id: current_user.id))
     @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))

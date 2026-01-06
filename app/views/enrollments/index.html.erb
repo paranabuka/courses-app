@@ -1,9 +1,11 @@
 <% content_for :title do %>
-  Enrollments
+  <%= action_name.humanize %>
+  enrollments
 <% end %>
 <h3>
   <div class="text-center">
-    Enrollments
+    <%= action_name.humanize %>
+    enrollments
     <span class="badge bg-info"><%= @enrollments.count %></span>
   </div>
 </h3>
