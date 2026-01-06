@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <i class="fa-regular fa-square-check"></i>
+    <% if !@course.owned_by?(current_user) && lesson.completed_by?(current_user) %>
+      <i class="text-success fa-solid fa-square-check"></i>
+    <% else %>
+      <i class="text-secondary fa-regular fa-square"></i>
+    <% end %>
     <%= link_to lesson.title, course_lesson_path(@course, lesson) %>
   </div>
   <% if policy(lesson).show? %>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :courses
   has_many :enrollments
+  has_many :user_lessons
 
   rolify
 
@@ -34,6 +35,10 @@ class User < ApplicationRecord
 
   def enroll_in(course)
     enrollments.create(course: course, price: course.price)
+  end
+
+  def view_lesson(lesson)
+    user_lessons.where(lesson: lesson).first_or_create unless lesson.course.user_id == id
   end
 
   private
