@@ -40,7 +40,9 @@
       </h5>
       <ul class="list-group">
         <% @lessons.each do |lesson| %>
-          <%= render partial: 'lessons/lesson_preview', locals: { lesson: lesson } %>
+          <li class="list-group-item">
+            <%= render partial: 'lessons/lesson_preview', locals: { lesson: lesson } %>
+          </li>
         <% end %>
       </ul>
       <h5 class="mt-3">

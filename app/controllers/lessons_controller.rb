@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: %i[new create]
+  before_action :set_course, only: %i[new create show]
   before_action :set_lesson, only: %i[show edit update destroy]
 
   # GET /lessons or /lessons.json
@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     current_user.view_lesson(@lesson)
+    @lessons = @course.lessons
   end
 
   # GET /lessons/new

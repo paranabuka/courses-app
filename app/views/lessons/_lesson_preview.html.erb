@@ -1,14 +1,12 @@
-<li class="list-group-item">
-  <% if !@course.owned_by?(current_user) && lesson.completed_by?(current_user) %>
-    <i class="text-success fa-solid fa-square-check"></i>
-  <% else %>
-    <i class="text-secondary fa-regular fa-square"></i>
-  <% end %>
-  <%= link_to lesson.title, course_lesson_path(@course, lesson) %>
-  <% if policy(lesson).edit? %>
-    <div class="float-end">
-      <%= link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning text-dark' %>
-      <%= link_to 'Destroy', [@course, lesson], class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  <% end %>
-</li>
+<% if !@course.owned_by?(current_user) && lesson.completed_by?(current_user) %>
+  <i class="text-success fa-solid fa-square-check"></i>
+<% else %>
+  <i class="text-secondary fa-regular fa-square"></i>
+<% end %>
+<%= link_to lesson.title, course_lesson_path(@course, lesson) %>
+<% if policy(lesson).edit? %>
+  <div class="float-end">
+    <%= link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning text-dark' %>
+    <%= link_to 'Destroy', [@course, lesson], class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
