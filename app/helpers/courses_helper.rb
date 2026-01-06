@@ -42,10 +42,28 @@ module CoursesHelper
   end
 
   def add_review(enrollment)
-    link_to 'Add review', edit_enrollment_path(enrollment)
+    link_to edit_enrollment_path(enrollment) do
+      "#{star_icon} Add review".html_safe
+    end
   end
 
   def see_review(enrollment)
-    link_to 'See review', enrollment
+    link_to enrollment do
+      "#{review_icon} Your review".html_safe
+    end
+  end
+
+  def star_icon
+    content_tag(:i, '', class: 'text-warning fa-solid fa-star')
+  end
+
+  # def rating_stars(rating)
+  #   rating.times.map do
+  #     star_icon
+  #   end.join
+  # end
+
+  def review_icon
+    content_tag(:i, '', class: 'fa-solid fa-comment')
   end
 end
