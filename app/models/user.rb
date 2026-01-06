@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[email]
+    %w[id email]
   end
 
   def online?
