@@ -38,7 +38,10 @@ class User < ApplicationRecord
   end
 
   def view_lesson(lesson)
-    user_lessons.where(lesson: lesson).first_or_create unless lesson.course.user_id == id
+    return if lesson.course.owned_by?(self)
+
+    user_lesson = user_lessons.where(lesson: lesson).first_or_create
+    user_lesson.increment!(:impressions)
   end
 
   private
