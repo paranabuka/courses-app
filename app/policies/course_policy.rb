@@ -12,6 +12,13 @@ class CoursePolicy < ApplicationPolicy
     # end
   end
 
+  def show?
+    @user.has_role?(:admin) ||
+      @record.owned_by?(@user) ||
+      @record.already_enrolled?(user) ||
+      @record.published && @record.approved
+  end
+
   def new?
     @user.has_role? :instructor
   end
