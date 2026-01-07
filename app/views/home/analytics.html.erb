@@ -1,0 +1,6 @@
+<h3>Users created per day</h3>
+<%= line_chart @users.group_by_day(:created_at).count %>
+<h3>Enrollments created per day</h3>
+<%= column_chart @enrollments.group_by_day(:created_at).count %>
+<h3>Courses popularity</h3>
+<%= bar_chart @enrolled_courses.group(:'courses.title').count %>
