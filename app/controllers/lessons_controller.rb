@@ -11,7 +11,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     current_user.view_lesson(@lesson)
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   # GET /lessons/new
@@ -74,7 +74,6 @@ class LessonsController < ApplicationController
   end
 
   def set_lesson
-    @course = Course.friendly.find(params[:course_id])
     @lesson = Lesson.friendly.find(params[:id])
   end
 
