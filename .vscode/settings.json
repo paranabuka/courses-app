@@ -1,11 +1,8 @@
 {
   // Ruby
   "[ruby]": {
-    "editor.defaultFormatter": "rubocop.vscode-rubocop",
     "editor.formatOnSave": true
   },
-  // Rubocop
-  "rubocop.safeAutocorrect": true,
   // ERB files
   "[erb]": {
     "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
@@ -16,6 +13,5 @@
   },
   "emmet.includeLanguages": {
     "erb": "html"
-  },
-  "erb-formatter.lineLength": 120
+  }
 }
