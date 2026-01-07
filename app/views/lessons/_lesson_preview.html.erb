@@ -1,4 +1,4 @@
-<% if !@course.owned_by?(current_user) && lesson.completed_by?(current_user) %>
+<% if current_user && !@course.owned_by?(current_user) && lesson.completed_by?(current_user) %>
   <i class="text-success fa-solid fa-square-check"></i>
 <% else %>
   <i class="text-secondary fa-regular fa-square"></i>

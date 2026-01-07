@@ -23,7 +23,11 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/new
   def new
-    @enrollment = Enrollment.new
+    if current_user && @course.already_enrolled?(current_user)
+      redirect_to course_path(@course), notice: 'You have already enrolled in the course.'
+    else
+      @enrollment = Enrollment.new
+    end
   end
 
   # GET /enrollments/1/edit

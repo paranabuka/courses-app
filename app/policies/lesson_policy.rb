@@ -23,7 +23,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def edit?
-    @user.has_role?(:instructor) && @record.course.user_id == @user.id
+    @user&.has_role?(:instructor) && @record.course.user_id == @user.id
   end
 
   def create?

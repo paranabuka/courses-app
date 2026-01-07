@@ -22,7 +22,7 @@ module CoursesHelper
   private
 
   def check_price(course)
-    link_to 'Check price', course_path(course), class: 'btn btn-success btn-md text-light'
+    link_to 'Check price', new_course_enrollment_path(course), class: 'btn btn-success btn-md text-light'
   end
 
   def view_analytics(course)
