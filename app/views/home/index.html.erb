@@ -53,73 +53,103 @@
   </div>
 </div>
 <% if current_user %>
-  <h3>
-    <i class="fa-solid fa-rocket"></i>
-    Continue Learning
-  </h3>
-  <div class="container my-3">
-    <div class="row" data-masonry='{"percentPosition": true }'>
-      <% @enrolled_courses.each do |course| %>
-        <div class="col-sm-6 col-lg-4 mb-4">
-          <%= render "courses/course", course: course %>
-        </div>
+  <div class="row my-3">
+    <h3>
+      <i class="fa-solid fa-rocket"></i>
+      Continue Learning
+    </h3>
+    <div class="container">
+      <div class="row" data-masonry='{"percentPosition": true }'>
+        <% @enrolled_courses.each do |course| %>
+          <div class="col-sm-6 col-lg-4 mb-2">
+            <%= render "courses/course", course: course %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-end">
+      <%= link_to my_enrolled_courses_path do %>
+        My enrolled courses
+        <i class="fa-solid fa-up-right-from-square"></i>
       <% end %>
-      <hr>
     </div>
   </div>
 <% end %>
-<h3>
-  <i class="fa-solid fa-chart-line"></i>
-  Popular Courses
-</h3>
-<div class="container my-3">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @popular_courses.each do |course| %>
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <%= render "courses/course", course: course %>
-      </div>
+<div class="row my-3">
+  <h3>
+    <i class="fa-solid fa-chart-line"></i>
+    Popular Courses
+  </h3>
+  <div class="container">
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <% @popular_courses.each do |course| %>
+        <div class="col-sm-6 col-lg-4 mb-2">
+          <%= render "courses/course", course: course %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-end">
+    <%= link_to courses_path(courses_search: {s: 'enrollments_count desc'}) do %>
+      Most popular courses
+      <i class="fa-solid fa-up-right-from-square"></i>
     <% end %>
-    <hr>
   </div>
 </div>
-<h3>
-  <i class="fa-solid fa-star"></i>
-  Top Rated Courses
-</h3>
-<div class="container my-3">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @top_rated_courses.each do |course| %>
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <%= render "courses/course", course: course %>
-      </div>
+<div class="row my-3">
+  <h3>
+    <i class="fa-solid fa-star"></i>
+    Top Rated Courses
+  </h3>
+  <div class="container">
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <% @top_rated_courses.each do |course| %>
+        <div class="col-sm-6 col-lg-4 mb-2">
+          <%= render "courses/course", course: course %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-end">
+    <%= link_to courses_path(courses_search: {s: 'average_rating desc'}) do %>
+      Top rated courses
+      <i class="fa-solid fa-up-right-from-square"></i>
     <% end %>
-    <hr>
   </div>
 </div>
-<h3>
-  <i class="fa-solid fa-clock"></i>
-  Most Recent Courses
-</h3>
-<div class="container my-3">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @most_recent_courses.each do |course| %>
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <%= render "courses/course", course: course %>
-      </div>
+<div class="row my-3">
+  <h3>
+    <i class="fa-solid fa-clock"></i>
+    Most Recent Courses
+  </h3>
+  <div class="container">
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <% @most_recent_courses.each do |course| %>
+        <div class="col-sm-6 col-lg-4 mb-2">
+          <%= render "courses/course", course: course %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-end">
+    <%= link_to courses_path(courses_search: {s: 'created_at desc'}) do %>
+      Latest courses
+      <i class="fa-solid fa-up-right-from-square"></i>
     <% end %>
-    <hr>
   </div>
 </div>
-<h3>
-  <i class="fa-solid fa-comments"></i>
-  What our students have to say
-</h3>
-<div class="container my-3">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @reviewed_enrollments.each do |enrollment| %>
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <%= render "enrollments/enrollment", enrollment: enrollment %>
-      </div>
-    <% end %>
+<div class="row my-3">
+  <h3>
+    <i class="fa-solid fa-comments"></i>
+    What our students have to say
+  </h3>
+  <div class="container">
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <% @reviewed_enrollments.each do |enrollment| %>
+        <div class="col-sm-6 col-lg-4 mb-2">
+          <%= render "enrollments/enrollment", enrollment: enrollment %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
