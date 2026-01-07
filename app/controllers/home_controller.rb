@@ -3,9 +3,9 @@ class HomeController < ApplicationController
 
   def index
     @enrolled_courses = Course.enrolled_by(current_user).most_recent_enrolled.limit(3) if current_user
-    @popular_courses = Course.popular.most_recent.limit(3)
-    @top_rated_courses = Course.top_rated.most_recent.limit(3)
-    @most_recent_courses = Course.most_recent.limit(3)
+    @popular_courses = Course.published.approved.popular.most_recent.limit(3)
+    @top_rated_courses = Course.published.approved.top_rated.most_recent.limit(3)
+    @most_recent_courses = Course.published.approved.most_recent.limit(3)
     @reviewed_enrollments = Enrollment.reviewed.top_rated.recently_updated.limit(3)
   end
 
