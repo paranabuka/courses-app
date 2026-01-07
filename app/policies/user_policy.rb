@@ -27,4 +27,8 @@ class UserPolicy < ApplicationPolicy
   def update?
     @user.has_role?(:admin)
   end
+
+  def admin?
+    @user.has_role?(:admin)
+  end
 end

@@ -30,20 +30,18 @@
     </div>
   </div>
   <% if current_user %>
-    <% if policy(course).edit? || policy(course).destroy? %>
+    <% if policy(course).owner? %>
       <div class="card-footer">
-        <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' if policy(course).edit? %>
-        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' if policy(course).edit? %>
+        <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' %>
+        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' %>
         <%= link_to 'Destroy', course, class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } if policy(course).destroy? %>
-        <% if policy(course).owner? %>
-          <%= link_to analytics_course_path(course), class: 'btn btn-sm btn-info text-light' do %>
-            <div class="fa-solid fa-chart-area"></div>
-            Analytics
-          <% end %>
+        <%= link_to analytics_course_path(course), class: 'btn btn-sm btn-info text-light' do %>
+          <div class="fa-solid fa-chart-area"></div>
+          Analytics
         <% end %>
       </div>
     <% end %>
-    <% if current_user.has_role?(:admin) || policy(course).owner? %>
+    <% if policy(current_user).admin? || policy(course).owner? %>
       <div class="card-footer">
         <% if course.published %>
           <span class="badge bg-success">Published</span>
