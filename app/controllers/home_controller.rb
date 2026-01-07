@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 
   def activities
     if current_user.has_role?(:admin)
-      @activities = PublicActivity::Activity.all
+      @pagy, @activities = pagy(PublicActivity::Activity.all.order(created_at: :desc), items: 20)
     else
       redirect_to root_path, alert: unauthorized_msg
     end
