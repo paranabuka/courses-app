@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get :my_enrolled, :pending_review, :my_created, :pending_approval, on: :collection
 
     member do
+      get :analytics
       patch :approve
       patch :reject
     end

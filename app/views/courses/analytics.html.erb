@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  <%= @course.title %>
+<% end %>
+<%= link_to 'Courses', courses_path %> /
+<%= link_to @course.title, course_path(@course) %> /
+<%= link_to analytics_course_path(@course) do %>
+  <div class="fa-solid fa-chart-area"></div>
+  Analytics
+<% end %>
+<h4 class="text-center">
+  <%= "Analytics for #{@course.title}" %>
+</h4>
+Enrollments per day (count)
+<%= line_chart @course.enrollments.group_by_day(:created_at).count %>
+Enrollments per day (revenue)
+<%= line_chart @course.enrollments.group_by_day(:created_at).sum(:price) %>
+Unique user views
+<%= bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').count %>
+Impressions per lesson
+<%= bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').sum(:impressions) %>

@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
-  before_action :set_course, only: %i[show edit update destroy approve reject]
+  before_action :set_course, only: %i[show edit update destroy approve reject analytics]
 
   # GET /courses or /courses.json
   def index
@@ -69,6 +69,10 @@ class CoursesController < ApplicationController
     authorize @course, :approve?
     @course.update_attribute(:approved, false)
     redirect_to @course, notice: 'Course rejected successfully.'
+  end
+
+  def analytics
+    authorize @course, :owner?
   end
 
   # POST /courses or /courses.json
