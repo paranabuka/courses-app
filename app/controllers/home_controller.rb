@@ -18,13 +18,7 @@ class HomeController < ApplicationController
   end
 
   def analytics
-    if current_user.has_role?(:admin)
-      @users = User.all
-      @enrollments = Enrollment.all
-      @enrolled_courses = @enrollments.joins(:course)
-    else
-      redirect_to root_path, alert: unauthorized_msg
-    end
+    redirect_to root_path, alert: unauthorized_msg unless current_user.has_role?(:admin)
   end
 
   private

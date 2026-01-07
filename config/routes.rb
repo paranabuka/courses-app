@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   get 'activities', to: 'home#activities'
   get 'analytics', to: 'home#analytics'
   
+  namespace :charts do
+    get 'users_per_day'
+    get 'enrollments_per_day'
+    get 'courses_popularity'
+    get 'money_makers'
+  end
+
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
