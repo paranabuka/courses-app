@@ -88,6 +88,13 @@
               <b>Admin</b>
             </a>
             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+              <%= link_to pending_approval_courses_path, class: "dropdown-item" do %>
+                <div class="fa-solid fa-eye"></div>
+                Courses to approve
+                <span class="badge bg-danger">
+                  <%= Course.published.not_approved.count %>
+                </span>
+              <% end %>
               <%= link_to users_path, class: "dropdown-item" do %>
                 <div class="fa fa-users"></div>
                 Users

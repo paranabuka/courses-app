@@ -17,6 +17,9 @@ class Course < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, _model) { controller.current_user }
 
+  scope :published, -> { where(published: true) }
+  scope :approved, -> { where(approved: true) }
+  scope :not_approved, -> { where(approved: false) }
   scope :popular, -> { order(enrollments_count: :desc) }
   scope :top_rated, -> { order(average_rating: :desc) }
   scope :most_recent, -> { order(created_at: :desc) }

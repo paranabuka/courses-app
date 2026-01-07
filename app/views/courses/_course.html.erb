@@ -29,11 +29,36 @@
       <%= link_to course.user.username, user_path(course.user) %>
     </div>
   </div>
-  <% if current_user && policy(course).edit? %>
-    <div class="card-footer">
-      <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' if policy(course).owner? %>
-      <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' %>
-      <%= link_to 'Destroy', course, class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
+  <% if current_user %>
+    <% if policy(course).edit? || policy(course).destroy? %>
+      <div class="card-footer">
+        <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' if policy(course).edit? %>
+        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' if policy(course).edit? %>
+        <%= link_to 'Destroy', course, class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } if policy(course).destroy? %>
+      </div>
+    <% end %>
+    <% if current_user.has_role?(:admin) || policy(course).owner? %>
+      <div class="card-footer">
+        <% if course.published %>
+          <span class="badge bg-success">Published</span>
+        <% else %>
+          <span class="badge bg-danger">Not published</span>
+        <% end %>
+        <% if course.approved %>
+          <span class="badge bg-success">Approved</span>
+        <% else %>
+          <span class="badge bg-danger">Not approved</span>
+        <% end %>
+      </div>
+      <% if policy(course).approve? %>
+        <div class="card-footer">
+          <% if course.approved %>
+            <%= link_to 'Reject', reject_course_path(course), method: :patch, class: 'btn btn-sm btn-danger' %>
+          <% else %>
+            <%= link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success' %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

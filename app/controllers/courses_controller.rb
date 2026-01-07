@@ -1,10 +1,10 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[show edit update destroy approve reject]
 
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
-    @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.published.approved.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
 
@@ -46,6 +46,26 @@ class CoursesController < ApplicationController
   # GET /courses/1/edit
   def edit
     authorize @course
+  end
+
+  def pending_approval
+    @ransack_path = pending_approval_courses_path
+    @q = Course.published.not_approved
+    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render :index
+  end
+
+  def approve
+    authorize @course
+    @course.update_attribute(:approved, true)
+    redirect_to @course, notice: 'Course approved successfully.'
+  end
+
+  def reject
+    authorize @course, :approve?
+    @course.update_attribute(:approved, false)
+    redirect_to @course, notice: 'Course rejected successfully.'
   end
 
   # POST /courses or /courses.json
@@ -101,6 +121,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:title, :description, :short_description, :language, :level, :price)
+    params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published)
   end
 end

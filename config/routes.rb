@@ -9,7 +9,12 @@ Rails.application.routes.draw do
     resources :lessons
     resources :enrollments, only: [:new, :create]
 
-    get :my_enrolled, :pending_review, :my_created, on: :collection
+    get :my_enrolled, :pending_review, :my_created, :pending_approval, on: :collection
+
+    member do
+      patch :approve
+      patch :reject
+    end
   end
   
   resources :enrollments do
