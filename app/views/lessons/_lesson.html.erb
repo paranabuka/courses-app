@@ -13,9 +13,23 @@
     </div>
     <% if policy(lesson).edit? %>
       <div class="card-footer">
-        <%= link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-outline-warning' %>
-        <%= link_to 'Destroy', [@course, lesson], class: 'btn btn-sm btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning' %>
+        <%= link_to 'Destroy', [@course, lesson], class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
+    <div class="card-footer">
+      <div class="float-start">
+        <%= link_to course_lesson_path(@course, @previous_lesson), class: 'btn btn-sm btn-outline-secondary fw-bold' do %>
+          <i class="fa-solid fa-arrow-left"></i>
+          Previous
+        <% end if @previous_lesson.present? %>
+      </div>
+      <div class="float-end">
+        <%= link_to course_lesson_path(@course, @next_lesson), class: 'btn btn-sm btn-outline-secondary fw-bold' do %>
+          <i class="fa-solid fa-arrow-right"></i>
+          Next
+        <% end if @next_lesson.present? %>
+      </div>
+    </div>
   <% end %>
 </div>

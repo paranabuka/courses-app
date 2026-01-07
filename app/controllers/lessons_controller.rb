@@ -12,6 +12,8 @@ class LessonsController < ApplicationController
     authorize @lesson
     current_user.view_lesson(@lesson)
     @lessons = @course.lessons.rank(:row_order)
+    @previous_lesson = @lesson.previous
+    @next_lesson = @lesson.next
   end
 
   # GET /lessons/new

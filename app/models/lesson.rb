@@ -23,4 +23,12 @@ class Lesson < ApplicationRecord
   def completed_by?(user)
     user_lessons.where(user: user).exists?
   end
+
+  def previous
+    course.lessons.where('row_order < ?', row_order).order(row_order: :desc).limit(1).first
+  end
+
+  def next
+    course.lessons.where('row_order > ?', row_order).order(row_order: :asc).limit(1).first
+  end
 end
