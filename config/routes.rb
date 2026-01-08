@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
 
   resources :courses do
-    resources :lessons
+    resources :lessons do
+      put :sort
+    end
+    
     resources :enrollments, only: [:new, :create]
 
     get :my_enrolled, :pending_review, :my_created, :pending_approval, on: :collection

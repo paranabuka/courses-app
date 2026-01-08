@@ -38,11 +38,13 @@
           </div>
         <% end %>
       </h5>
-      <ul class="list-group">
+      <ul class="list-group <%= 'jquery-ui-sortable' if policy(@course).edit? %>">
         <% @lessons.each do |lesson| %>
-          <li class="list-group-item">
-            <%= render partial: 'lessons/lesson_preview', locals: { lesson: lesson } %>
-          </li>
+          <%= content_tag 'div', id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson) } do %>
+            <li class="list-group-item d-flex">
+              <%= render partial: 'lessons/lesson_preview', locals: { lesson: lesson } %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <h5 class="mt-3">

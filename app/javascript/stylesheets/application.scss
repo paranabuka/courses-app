@@ -4,7 +4,21 @@ body {
   background-color: azure;
 }
 
-.form-control.is-invalid { background-image: none; }
-.form-select.is-invalid { background-image: none; }
-.form-control.is-valid { background-image: none; }
-.form-select.is-valid { background-image: none; }
+.form-control.is-invalid {
+  background-image: none;
+}
+.form-select.is-invalid {
+  background-image: none;
+}
+.form-control.is-valid {
+  background-image: none;
+}
+.form-select.is-valid {
+  background-image: none;
+}
+
+.ui-state-highlight {
+  height: 3em;
+  line-height: 1.2em;
+  background-color: lightgray;
+}

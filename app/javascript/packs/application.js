@@ -3,24 +3,49 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
+import "@popperjs/core";
+import "bootstrap";
+import "stylesheets/application";
+import "@fortawesome/fontawesome-free/css/all";
+require("trix");
+require("@rails/actiontext");
+require("chartkick");
+require("chart.js");
+require("jquery");
+require("jquery-ui-dist/jquery-ui");
 
-import "@popperjs/core"
-import "bootstrap"
+// Optional: Test if it's working
+$(document).on("turbolinks:load", () => {
+  console.log("jQuery UI version: " + $.ui.version);
+});
 
-import "stylesheets/application"
+$(document).on("turbolinks:load", function () {
+  $(".jquery-ui-sortable").sortable({
+    cursor: "grabbing",
+    cursorAt: { left: 10 },
+    placeholder: "ui-state-highlight",
+    update: function (e, ui) {
+      let item = ui.item;
+      let item_data = item.data();
+      let params = { _method: "put" };
+      params[item_data.modelName] = { row_order_position: item.index() };
+      $.ajax({
+        type: "POST",
+        url: item_data.updateUrl,
+        dataType: "json",
+        data: params,
+      });
+    },
+    stop: function (e, ui) {
+      console.log("stop called when finishing sort cards");
+    },
+  });
+});
 
-import "@fortawesome/fontawesome-free/css/all"
-
-require("trix")
-require("@rails/actiontext")
-
-require("chartkick")
-require("chart.js")
-
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
