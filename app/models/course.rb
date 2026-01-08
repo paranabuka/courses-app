@@ -5,6 +5,8 @@ class Course < ApplicationRecord
   has_many :enrollments, dependent: :restrict_with_error
   has_many :user_lessons, through: :lessons
 
+  has_one_attached :cover
+
   validates :title, :short_description, :language, :level, :price, presence: true
   validates :title, uniqueness: true
   validates :description, presence: true, length: { minimum: 5 }

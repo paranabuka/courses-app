@@ -12,7 +12,8 @@
           <i class="fa-solid fa-graduation-cap"></i>
           <%= link_to @course.title, @course %>
         </h3>
-        <div class="mx-auto">
+        <%= image_tag @course.cover, width: '300px' if @course.cover.attached? %>
+        <div class="mt-4 mx-auto">
           <i class="fa-solid fa-clock"></i>
           <%= @course.updated_at.strftime('%b-%Y') %>
         </div>
