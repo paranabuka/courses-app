@@ -35,3 +35,13 @@
     }
   }
 }
+
+// Hide attachment button in all editors
+.trix-button-group--file-tools {
+  display: none !important;
+}
+
+// // Hide attachment button on specific editors (wrap the form in 'prevent-attachments' class)
+// .prevent-attachments .trix-button-group--file-tools {
+//   display: none !important;
+// }

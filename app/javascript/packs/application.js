@@ -11,6 +11,7 @@ import "@popperjs/core";
 import "bootstrap";
 import "stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all";
+import "../trix-editor-overrides";
 require("trix");
 require("@rails/actiontext");
 require("chartkick");
