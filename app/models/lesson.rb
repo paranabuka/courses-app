@@ -3,12 +3,14 @@ class Lesson < ApplicationRecord
 
   has_many :user_lessons, dependent: :destroy
 
-  validates :title, :content, :course, presence: true
+  has_rich_text :content
+
+  validates :title, presence: true, length: { maximum: 60 }
+  validates_uniqueness_of :title, scope: :course_id
+  validates :content, :course, presence: true
 
   extend FriendlyId
   friendly_id :title, use: :slugged
-
-  has_rich_text :content
 
   include PublicActivity::Model
   tracked owner: ->(controller, _model) { controller.current_user }
