@@ -4,15 +4,19 @@
   <div class="d-grid gap-2">
     <div class="form-inputs">
       <%= f.input :title %>
-      <%= f.label :cover %>
-      <div class="row"></div>
-      <%= image_tag @course.cover, width: '200px' if @course.cover.attached? %>
-      <div class="row mb-2"></div>
-      <%= f.file_field :cover %>
-      <div class="row mb-3"></div>
+      <%= f.input :cover %>
+      <% if @course.cover.attached? %>
+        <figure>
+          <%= image_tag @course.cover, class: 'img-thumbnail', alt: 'Course cover', width: '300px' %>
+          <figcaption class="figure-caption">
+            <%= @course.cover.filename %>
+          </figcaption>
+        </figure>
+        <div class="row mb-3"></div>
+      <% end %>
       <%= f.label :description %>
-      <%= f.rich_text_area :description, class: 'mb-3' %>
-      <div class="small"><%= f.error :description, class: 'text-danger' %></div>
+      <%= f.rich_text_area :description %>
+      <div class="small mb-3"><%= f.error :description, class: 'text-danger' %></div>
       <%= f.input :short_description %>
       <%= f.input :language, collection: Course.languages %>
       <%= f.input :level, collection: Course.levels %>

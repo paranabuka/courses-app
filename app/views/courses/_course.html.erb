@@ -3,6 +3,7 @@
     <i class="fa-solid fa-graduation-cap"></i>
     <%= link_to course.title, course %>
   </div>
+  <%= image_tag course.cover, class: 'img-fluid' if course.cover.attached? %>
   <div class="card-body">
     <%= course.short_description %>
   </div>

@@ -10,6 +10,9 @@ class Course < ApplicationRecord
   validates :title, :short_description, :language, :level, :price, presence: true
   validates :title, uniqueness: true
   validates :description, presence: true, length: { minimum: 5 }
+  validates :cover, presence: true,
+                    content_type: ['image/png', 'image/jpeg'],
+                    size: { less_than: 200.kilobytes }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
