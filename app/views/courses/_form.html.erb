@@ -9,7 +9,7 @@
         <figure>
           <%= image_tag @course.cover, class: 'img-thumbnail', alt: 'Course cover', width: '300px' %>
           <figcaption class="figure-caption">
-            <%= @course.cover.filename %>
+            <%= "#{@course.cover.filename} (#{number_to_human_size(@course.cover.byte_size)})" %>
           </figcaption>
         </figure>
         <div class="row mb-3"></div>

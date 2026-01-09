@@ -1,9 +1,13 @@
 <% content_for :title do %>
   <%= @course.title %>
 <% end %>
-<%= link_to 'Courses', courses_path %> /
-<%= link_to @course.title, course_path(@course) %>
-<p></p>
+<div class="d-flex gap-2 mb-3">
+  <%= link_to 'Courses', courses_path %> /
+  <%= link_to course_path(@course) do %>
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= @course.title %>
+  <% end %>
+</div>
 <div class="row">
   <div class="col-lg-8 order-1 order-lg-1">
     <div class="d-grid gap-2">

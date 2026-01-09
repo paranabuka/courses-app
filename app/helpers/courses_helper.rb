@@ -26,7 +26,7 @@ module CoursesHelper
   end
 
   def view_analytics(course)
-    link_to 'You created this course. See analytics', course_path(course)
+    link_to 'You created this course. See analytics', analytics_course_path(course)
   end
 
   def keep_learning(course)

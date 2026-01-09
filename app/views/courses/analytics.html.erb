@@ -1,12 +1,17 @@
 <% content_for :title do %>
   <%= @course.title %>
 <% end %>
-<%= link_to 'Courses', courses_path %> /
-<%= link_to @course.title, course_path(@course) %> /
-<%= link_to analytics_course_path(@course) do %>
-  <div class="fa-solid fa-chart-area"></div>
-  Analytics
-<% end %>
+<div class="d-flex gap-2 mb-3">
+  <%= link_to 'Courses', courses_path %> /
+  <%= link_to course_path(@course) do %>
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= @course.title %>
+  <% end %> /
+  <%= link_to analytics_course_path(@course) do %>
+    <div class="fa-solid fa-chart-area"></div>
+    Analytics
+  <% end %>
+</div>
 <h4 class="text-center">
   <%= "Analytics for #{@course.title}" %>
 </h4>

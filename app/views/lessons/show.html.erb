@@ -1,10 +1,16 @@
 <% content_for :title do %>
   <%= @lesson.title %>
 <% end %>
-<div class="mb-3">
+<div class="d-flex gap-2 mb-3">
   <%= link_to 'Courses', courses_path %> /
-  <%= link_to @course.title, course_path(@course) %> /
-  <%= link_to @lesson.title, course_lesson_path(@course, @lesson) %>
+  <%= link_to course_path(@course) do %>
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= @course.title %>
+  <% end %> /
+  <%= link_to course_lesson_path(@course, @lesson) do %>
+    <i class="fa-solid fa-list-check"></i>
+    <%= @lesson.title %>
+  <% end %>
 </div>
 <div class="row">
   <div class="col-lg-8 mb-3">
