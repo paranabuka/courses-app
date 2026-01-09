@@ -7,6 +7,25 @@
       <%= f.label :content %>
       <%= f.rich_text_area :content, class: 'mb-3' %>
       <div class="small"><%= f.error :content, class: 'text-danger' %></div>
+      <%= f.input :video %>
+      <% if @lesson.video.attached? %>
+        <h6 class="text-secondary">
+          <i class="fa-solid fa-file-video"></i>
+          <%= "#{@lesson.video.filename} (#{number_to_human_size(@lesson.video.byte_size)})" %>
+        </h6>
+      <% end %>
+      <%= f.input :video_thumbnail %>
+      <% if @lesson.video_thumbnail.attached? %>
+        <figure>
+          <%= image_tag @lesson.video_thumbnail, class: 'img-thumbnail', alt: 'Lesson video thumbnail', width: '300px' %>
+          <figcaption class="figure-caption">
+            <%= "#{@lesson.video_thumbnail.filename} (#{number_to_human_size(@course.cover.byte_size)})" %>
+          </figcaption>
+        </figure>
+      <% end %>
+      <% if @lesson.video.attached? || @lesson.video_thumbnail.attached? %>
+        <%= link_to 'Remove media', delete_media_course_lesson_path(@course, @lesson), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </div>
     <div class="form-actions">
       <%= f.button :submit %>

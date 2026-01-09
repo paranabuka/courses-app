@@ -9,6 +9,11 @@
   </div>
   <% if policy(lesson).show? %>
     <div class="card-body">
+      <% if lesson.video.attached? %>
+        <video controls preload="metadata" width="100%" poster="<%= url_for(lesson.video_thumbnail) if lesson.video_thumbnail.attached? %>">
+          <source src="<%= rails_blob_url(lesson.video) %>" type="<%= lesson.video.content_type %>">
+        </video>
+      <% end %>
       <%= lesson.content %>
     </div>
     <% if policy(lesson).edit? %>

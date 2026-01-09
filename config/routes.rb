@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :courses do
     resources :lessons do
       put :sort
+      
+      member do
+        delete :delete_media
+      end
     end
     
     resources :enrollments, only: [:new, :create]

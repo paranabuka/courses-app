@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: %i[new create show]
-  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[new create show edit update destroy delete_media]
+  before_action :set_lesson, only: %i[show edit update destroy delete_media]
 
   # GET /lessons or /lessons.json
   def index
@@ -76,6 +76,13 @@ class LessonsController < ApplicationController
     render body: nil
   end
 
+  def delete_media
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Media was sucessfully destroyed.'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -89,6 +96,6 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:title, :content, :row_order_position)
+    params.require(:lesson).permit(:title, :content, :video, :video_thumbnail, :row_order_position)
   end
 end

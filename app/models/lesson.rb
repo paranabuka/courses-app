@@ -4,10 +4,18 @@ class Lesson < ApplicationRecord
   has_many :user_lessons, dependent: :destroy
 
   has_rich_text :content
+  has_one_attached :video
+  has_one_attached :video_thumbnail
 
   validates :title, presence: true, length: { maximum: 60 }
   validates_uniqueness_of :title, scope: :course_id
   validates :content, :course, presence: true
+  validates :video,
+            content_type: ['video/mp4'],
+            size: { less_than: 100.megabytes }
+  validates :video_thumbnail,
+            content_type: ['image/png', 'image/jpeg'],
+            size: { less_than: 200.kilobytes }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
