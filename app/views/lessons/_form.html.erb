@@ -4,9 +4,7 @@
   <div class="d-grid gap-2">
     <div class="form-inputs">
       <%= f.input :title %>
-      <%= f.label :content %>
-      <%= f.rich_text_area :content, class: 'mb-3' %>
-      <div class="small"><%= f.error :content, class: 'text-danger' %></div>
+      <%= f.input :content, as: :rich_text_area %>
       <%= f.input :video %>
       <% if @lesson.video.attached? %>
         <h6 class="text-secondary">

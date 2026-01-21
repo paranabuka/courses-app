@@ -14,9 +14,7 @@
         </figure>
         <div class="row mb-3"></div>
       <% end %>
-      <%= f.label :description %>
-      <%= f.rich_text_area :description %>
-      <div class="small mb-3"><%= f.error :description, class: 'text-danger' %></div>
+      <%= f.input :description, as: :rich_text_area %>
       <%= f.input :short_description %>
       <%= f.input :language, collection: Course.languages %>
       <%= f.input :level, collection: Course.levels %>
