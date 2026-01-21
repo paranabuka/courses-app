@@ -15,6 +15,22 @@
 <div class="row">
   <div class="col-lg-8 mb-3">
     <%= render partial: "lesson", locals: { lesson: @lesson } %>
+    <h4 class="mt-3">
+      <i class="fa-solid fa-message"></i>
+      Comments:
+      <%= @comments.count %>
+    </h4>
+    <div class="card mb-3">
+      <div class="card-header">New comment:</div>
+      <div class="card-body">
+        <%= render 'lessons/comments/form' %>
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <% @comments.each do |comment| %>
+        <%= render 'lessons/comments/comment', comment: comment %>
+      <% end %>
+    </div>
   </div>
   <div class="col-lg-4">
     <ul class="list-group">

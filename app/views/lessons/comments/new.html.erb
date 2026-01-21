@@ -1,0 +1,17 @@
+<% content_for :title do %>
+  New comment
+<% end %>
+<div class="d-flex gap-2 mb-3">
+  <%= link_to 'Courses', courses_path %> /
+  <%= link_to course_path(@course) do %>
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= @course.title %>
+  <% end %> /
+  <%= link_to course_lesson_path(@course, @lesson) do %>
+    <i class="fa-solid fa-list-check"></i>
+    <%= @lesson.title %>
+  <% end %> /
+  New comment
+</div>
+<%= render 'lessons/comments/form' %>
+<%= link_to 'Back', course_lesson_path(@course, @lesson) %>

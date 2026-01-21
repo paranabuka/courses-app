@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
 
   resources :courses do
-    resources :lessons do
+    resources :lessons, except: [:index] do
+      resources :comments, except: [:index]
+
       put :sort
       
       member do

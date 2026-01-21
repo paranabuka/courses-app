@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <%= comment.created_at.strftime('%Y-%m-%d %H:%m') %>
+    <%= "(#{time_ago_in_words(comment.created_at)})" %>
+    by
+    <%= link_to comment.user, user_path(comment.user) %>
+  </div>
+  <div class="card-body">
+    <%= comment.content %>
+  </div>
+</div>

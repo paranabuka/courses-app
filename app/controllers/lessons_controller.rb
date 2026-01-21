@@ -14,6 +14,8 @@ class LessonsController < ApplicationController
     @lessons = @course.lessons.rank(:row_order)
     @previous_lesson = @lesson.previous
     @next_lesson = @lesson.next
+    @comment = Comment.new
+    @comments = @lesson.comments.order(created_at: :desc)
   end
 
   # GET /lessons/new
