@@ -4,6 +4,7 @@
     <%= "(#{time_ago_in_words(comment.created_at)})" %>
     by
     <%= link_to comment.user, user_path(comment.user) %>
+    <%= link_to 'Destroy', [@course, @lesson, comment], class: 'btn btn-danger btn-sm text-light', method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <div class="card-body">
     <%= comment.content %>

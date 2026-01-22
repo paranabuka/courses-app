@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_course_and_lesson, only: %i[new create]
+  before_action :set_comment, only: %i[destroy]
+  before_action :set_course_and_lesson, only: %i[new create destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -17,7 +18,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to course_lesson_path(@course, @lesson), notice: 'Comment was successfully destroyed.' }
+    end
+  end
+
   private
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
   def set_course_and_lesson
     @course = Course.friendly.find(params[:course_id])
