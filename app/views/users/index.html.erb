@@ -35,6 +35,7 @@
           <th scope="col"><%= 'current_sign_in_ip'.humanize %></th>
           <th scope="col">Courses</th>
           <th scope="col">Enrollments</th>
+          <th scope="col">Lessons</th>
           <th class="col">Confirmed?</th>
           <th class="col">Roles</th>
         </tr>
@@ -57,6 +58,7 @@
             <td><%= user.current_sign_in_ip %></td>
             <td><%= user.courses_count %></td>
             <td><%= user.enrollments_count %></td>
+            <td><%= user.user_lessons_count %></td>
             <td>
               <% if user.confirmed_at.present? %>
                 <span class="badge text-bg-success">Yes</span>

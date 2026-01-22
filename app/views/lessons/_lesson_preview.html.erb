@@ -14,7 +14,7 @@
     <%= lesson.comments_count %>
     <% if policy(lesson).edit? %>
       <i class="fa-solid fa-user-group"></i>
-      <%= lesson.user_lessons.count %>
+      <%= lesson.user_lessons_count %>
       <i class="fa-solid fa-eye"></i>
       <%= lesson.user_lessons.map(&:impressions).sum %>
       <%= link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-warning btn-sm text-dark' %>
