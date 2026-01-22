@@ -45,7 +45,7 @@
       <ul class="list-group <%= 'jquery-ui-sortable' if policy(@course).edit? %>">
         <% @lessons.each do |lesson| %>
           <%= content_tag 'div', id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson) } do %>
-            <li class="list-group-item d-flex">
+            <li class="list-group-item">
               <%= render partial: 'lessons/lesson_preview', locals: { lesson: lesson } %>
             </li>
           <% end %>

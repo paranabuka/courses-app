@@ -8,32 +8,39 @@
     <% end %>
     <%= link_to user.email, user_path(user) %>
   </div>
-  <div class="card-footer">
+  <div class="card-header">
     Signed up
     <%= time_ago_in_words(user.created_at) %>
     ago
   </div>
-  <div class="card-footer">
-    <%= 'sign_in_count'.humanize %>
+  <div class="card-body">
+    <b><%= 'sign_in_count'.humanize %>:</b>
     <%= user.sign_in_count %>
     <div class="row"></div>
-    <%= 'current_sign_in_at'.humanize %>
+    <b><%= 'current_sign_in_at'.humanize %>:</b>
     <%= user.current_sign_in_at %>
     <div class="row"></div>
-    <%= 'last_sign_in_at'.humanize %>
+    <b><%= 'last_sign_in_at'.humanize %>:</b>
     <%= user.last_sign_in_at %>
     <div class="row"></div>
-    <%= 'current_sign_in_ip'.humanize %>
+    <b><%= 'current_sign_in_ip'.humanize %>:</b>
     <%= user.current_sign_in_ip %>
     <div class="row"></div>
-    <%= 'last_sign_in_ip'.humanize %>
+    <b><%= 'last_sign_in_ip'.humanize %>:</b>
     <%= user.last_sign_in_ip %>
   </div>
   <div class="card-footer">
+    <i class="fa-solid fa-graduation-cap"></i>
     Courses created:
     <%= user.courses_count %>
+    <div class="row"></div>
+    <i class="fa-solid fa-lock-open"></i>
     Enrollments:
     <%= user.enrollments_count %>
+    <div class="row"></div>
+    <i class="fa-solid fa-message"></i>
+    Comments:
+    <%= user.comments_count %>
   </div>
   <div class="card-footer">
     Confirmed email?
