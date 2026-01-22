@@ -7,6 +7,10 @@ module ApplicationHelper
       content_tag(:i, '', class: 'fa-solid fa-graduation-cap')
     when Lesson.name
       content_tag(:i, '', class: 'fa-solid fa-list-check')
+    when Enrollment.name
+      content_tag(:i, '', class: 'fa-solid fa-lock-open')
+    when Comment.name
+      content_tag(:i, '', class: 'fa-solid fa-message')
     end
   end
 

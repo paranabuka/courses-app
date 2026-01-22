@@ -15,6 +15,9 @@ class Enrollment < ApplicationRecord
   extend FriendlyId
   friendly_id :to_s, use: :slugged
 
+  include PublicActivity::Model
+  tracked owner: ->(controller, _model) { controller.current_user }
+
   scope :pending_review, -> { where(rating: [0, nil], review: ['', nil]) }
   scope :rated, -> { where.not(rating: [0, nil]) }
   scope :reviewed, -> { where.not(review: ['', nil]) }
@@ -22,7 +25,7 @@ class Enrollment < ApplicationRecord
   scope :recently_updated, -> { order(updated_at: :desc) }
 
   def to_s
-    "#{user} #{course}"
+    course.to_s
   end
 
   def self.ransackable_attributes(_auth_object = nil)
