@@ -17,7 +17,8 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    @user.has_role?(:admin)
+    @user.has_role?(:admin) ||
+      @record == @user
   end
 
   def edit?

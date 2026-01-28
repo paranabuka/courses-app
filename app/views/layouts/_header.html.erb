@@ -119,10 +119,18 @@
         <% if current_user %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="fa fa-user"></div>
+              <% if current_user.provider.present? %>
+                <%= image_tag current_user.image, size: '24x24', alt: current_user.email, class: 'rounded-circle' %>
+              <% else %>
+                <i class="fa fa-user"></i>
+              <% end %>
               <b><%= current_user.email %></b>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to user_path(current_user), class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do %>
+                <i class="fa-solid fa-circle-user"></i>
+                <b>My profile</b>
+              <% end %>
               <%= link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do %>
                 <div class="fa fa-cog"></div>
                 <b>Account settings</b>
