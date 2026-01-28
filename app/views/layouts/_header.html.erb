@@ -144,7 +144,15 @@
         <% else %>
           <%= link_to "Log in", new_user_session_path, class: "nav-link #{'active fw-bold' if current_page?(new_user_session_path)}" %>
           <%= link_to "Sign up", new_user_registration_path, class: "nav-link #{'active fw-bold' if current_page?(new_user_registration_path)}" %>
-          <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "nav-link", method: :post %>
+          <%= link_to user_google_oauth2_omniauth_authorize_path, class: "nav-link", method: :post do %>
+            <i class="fa-brands fa-google"></i>
+          <% end %>
+          <%= link_to user_github_omniauth_authorize_path, class: "nav-link", method: :post do %>
+            <i class="fa-brands fa-github"></i>
+          <% end %>
+          <%= link_to user_facebook_omniauth_authorize_path, class: "nav-link", method: :post do %>
+            <i class="fa-brands fa-facebook"></i>
+          <% end %>
         <% end %>
       </ul>
     </div>

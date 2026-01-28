@@ -2,10 +2,12 @@
   Learn anything, on your schedule
 <% end %>
 <div class="container-fluid text-lg-left p-5 bg-light">
-  <div class="display-4">
+  <div class="display-5 fw-bold mb-5">
     What do you want to learn today?
   </div>
-  <div class="p-4"></div>
+  <div class="display-6 mb-5">
+    Join to access all courses
+  </div>
   <% if current_user %>
     <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
       <div class="d-flex">

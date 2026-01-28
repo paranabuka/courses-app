@@ -71,6 +71,7 @@ GEM
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.20)
+    bigdecimal (4.0.1)
     bindex (0.8.1)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
@@ -189,6 +190,12 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
+    omniauth-facebook (10.0.0)
+      bigdecimal
+      omniauth-oauth2 (>= 1.2, < 3)
+    omniauth-github (2.0.1)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
     omniauth-google-oauth2 (1.2.1)
       jwt (>= 2.9.2)
       oauth2 (~> 2.0)
@@ -390,6 +397,8 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)
+  omniauth-facebook
+  omniauth-github (~> 2.0.0)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pagy
