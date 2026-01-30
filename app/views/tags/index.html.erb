@@ -1,0 +1,31 @@
+<% content_for :title do %>
+  Tags
+<% end %>
+<h3>
+  <div class="text-center">
+    Tags
+    <span class="badge bg-info"><%= @tags.count %></span>
+  </div>
+</h3>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <th scope="row"><%= tag.id %></th>
+          <td><%= tag.name %></td>
+          <td>
+            <%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } if policy(tag).destroy? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

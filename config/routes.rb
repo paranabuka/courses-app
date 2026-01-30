@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     get 'money_makers'
   end
 
-  resources :tags, only: [:create]
+  resources :tags, only: [:index, :create, :destroy]
 
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
