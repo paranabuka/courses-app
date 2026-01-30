@@ -127,7 +127,7 @@ class CoursesController < ApplicationController
   end
 
   def preload_tags
-    @tags = Tag.all
+    @tags = Tag.all.in_use
   end
 
   def ransack_and_pagy_courses(query)

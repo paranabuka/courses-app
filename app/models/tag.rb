@@ -4,6 +4,7 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3, maximum: 25 }, uniqueness: true
 
+  scope :in_use, -> { where.not(course_tags_count: 0) }
   scope :most_popular, -> { order(course_tags_count: :desc) }
 
   def self.ransackable_attributes(_auth_object = nil)
