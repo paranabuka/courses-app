@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     @top_rated_courses = Course.published.approved.top_rated.most_recent.limit(3)
     @most_recent_courses = Course.published.approved.most_recent.limit(3)
     @reviewed_enrollments = Enrollment.reviewed.top_rated.recently_updated.limit(3)
+    @popular_tags = Tag.in_use.most_popular.limit(10)
   end
 
   def activities

@@ -30,4 +30,8 @@ body {
   --bs-btn-padding-y: 0.05rem;
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
