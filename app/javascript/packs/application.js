@@ -18,6 +18,7 @@ require("chartkick");
 require("chart.js");
 require("jquery");
 require("jquery-ui-dist/jquery-ui");
+require("selectize");
 
 // Optional: Test if it's working
 $(document).on("turbolinks:load", () => {
@@ -49,6 +50,12 @@ $(document).on("turbolinks:load", function () {
   $("video").bind("contextmenu", function () {
     return false;
   });
+
+  if ($(".selectize")) {
+    $(".selectize").selectize({
+      sortField: "text",
+    });
+  }
 });
 
 Rails.start();

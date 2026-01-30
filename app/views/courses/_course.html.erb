@@ -66,4 +66,9 @@
       <% end %>
     <% end %>
   <% end %>
+  <div class="card-footer">
+    <% course.tags.each do |tag| %>
+      <span class="badge bg-info"><%= tag.name %></span>
+    <% end %>
+  </div>
 </div>

@@ -4,6 +4,7 @@
   <div class="d-grid gap-2">
     <div class="form-inputs">
       <%= f.input :title %>
+      <%= f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: "selectize" } %>
       <%= f.input :cover %>
       <% if @course.cover.attached? %>
         <figure>

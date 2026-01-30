@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   before_action :set_course, only: %i[show edit update destroy approve reject analytics]
+  before_action :preload_tags, only: %i[new edit]
 
   # GET /courses or /courses.json
   def index
@@ -86,6 +87,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
+        preload_tags
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -100,6 +102,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
+        preload_tags
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -126,9 +129,13 @@ class CoursesController < ApplicationController
     @course = Course.friendly.find(params[:id])
   end
 
+  def preload_tags
+    @tags = Tag.all
+  end
+
   # Only allow a list of trusted parameters through.
   def course_params
     params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published,
-                                   :cover)
+                                   :cover, tag_ids: [])
   end
 end
