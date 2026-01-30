@@ -24,3 +24,10 @@ body {
   line-height: 1.2em;
   background-color: lightgray;
 }
+
+.tag-btn {
+  --bs-btn-font-size: 0.75rem;
+  --bs-btn-padding-y: 0.05rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-weight: 600;
+}

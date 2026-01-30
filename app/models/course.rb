@@ -50,11 +50,11 @@ class Course < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title short_description language level price average_rating enrollments_count created_at]
+    %w[title short_description language level price average_rating enrollments_count created_at tags_name_cont_any]
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[user]
+    %w[user course_tags tags]
   end
 
   def owned_by?(user)

@@ -2,36 +2,35 @@ class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   before_action :set_course, only: %i[show edit update destroy approve reject analytics]
-  before_action :preload_tags, only: %i[new edit]
+  before_action :preload_tags, only: %i[index new edit my_enrolled pending_review my_created pending_approval]
 
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
-    @ransack_courses = Course.published.approved.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    ransack_and_pagy_courses(Course.published.approved)
   end
 
   def my_enrolled
     @ransack_path = my_enrolled_courses_path
-    @q = Course.joins(:enrollments).where(enrollments: { user_id: current_user.id })
-    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    ransack_and_pagy_courses(
+      Course.joins(:enrollments)
+            .where(enrollments: { user_id: current_user.id })
+    )
     render :index
   end
 
   def pending_review
     @ransack_path = pending_review_courses_path
-    @q = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user_id: current_user.id))
-    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    ransack_and_pagy_courses(
+      Course.joins(:enrollments)
+            .merge(Enrollment.pending_review.where(user_id: current_user.id))
+    )
     render :index
   end
 
   def my_created
     @ransack_path = my_created_courses_path
-    @q = Course.where(user_id: current_user.id)
-    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    ransack_and_pagy_courses(Course.where(user_id: current_user.id))
     render :index
   end
 
@@ -54,9 +53,7 @@ class CoursesController < ApplicationController
 
   def pending_approval
     @ransack_path = pending_approval_courses_path
-    @q = Course.published.not_approved
-    @ransack_courses = @q.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    ransack_and_pagy_courses(Course.published.not_approved)
     render :index
   end
 
@@ -131,6 +128,11 @@ class CoursesController < ApplicationController
 
   def preload_tags
     @tags = Tag.all
+  end
+
+  def ransack_and_pagy_courses(query)
+    @ransack_courses = query.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, :tags))
   end
 
   # Only allow a list of trusted parameters through.

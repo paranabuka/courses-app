@@ -18,14 +18,35 @@
       <i class="fa-solid fa-filter"></i>
       <b>Filtering</b>
       <%= f.search_field :title_cont, placeholder: "Title", class: "form-control form-control-sm" %>
+      <%= f.search_field :tags_name_cont_any, placeholder: "Tag name", class: "form-control form-control-sm" %>
       <%= f.search_field :short_description_cont, placeholder: "Description", class: "form-control form-control-sm" %>
       <%= f.select :language_cont, Course.languages, {prompt: 'Language'}, {class: 'form-select', data: {}} %>
       <%= f.select :level_cont, Course.levels, {prompt: 'Level'}, {class: 'form-select', data: {}} %>
       <%= f.search_field :price_eq, placeholder: "Price", class: "form-control form-control-sm" %>
       <%= f.search_field :user_email_cont, placeholder: "Instructor", class: "form-control form-control-sm" %>
-      <%= f.submit %>
-      <%= link_to @ransack_path, class: "btn btn-sm" do %>
-        <i class="fa-solid fa-rotate"></i>
+      <div class="btn-toolbar mt-2" role="toolbar">
+        <div class="btn-group me-2">
+          <%= f.button type: :submit, class: "btn btn-primary btn-sm" do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+          <% end %>
+        </div>
+        <div class="btn-group">
+          <%= link_to @ransack_path, class: "btn btn-secondary text-light btn-sm" do %>
+            <i class="fa-solid fa-filter-circle-xmark"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <hr>
+    <div>
+      <i class="fa-solid fa-tags"></i>
+      <b>Tags</b>
+    </div>
+    <% @tags.most_popular.each do |tag| %>
+      <%= link_to url_for(controller: controller_name, action: action_name, courses_search: {course_tags_tag_id_eq: tag.id}), class: "btn btn-info text-light tag-btn" do %>
+        <%= tag.name %>
+        <%= tag.course_tags_count %>
       <% end %>
     <% end %>
     <hr>
