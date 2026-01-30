@@ -59,6 +59,21 @@
         <%= render "enrollments/enrollment", enrollment: enrollment %>
       <% end %>
     </div>
+    <div class="row mt-4">
+      <h5>
+        <i class="fa-solid fa-rocket"></i>
+        Similar courses
+      </h5>
+      <div class="row row-cols-1 row-cols-md-3 g4">
+        <% @similar_courses.each do |course| %>
+          <% if @course.tags.pluck(:id).intersection(course.tags.pluck(:id)).count.positive? %>
+            <div class="col">
+              <%= render partial: 'course', locals: { course: course } %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-lg-4 order-0 order-lg-1 mb-3">
     <div class="sticky-top">

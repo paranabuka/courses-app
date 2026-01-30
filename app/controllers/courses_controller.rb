@@ -39,6 +39,7 @@ class CoursesController < ApplicationController
     authorize @course
     @lessons = @course.lessons.rank(:row_order)
     @recent_reviews = @course.enrollments.reviewed.top_rated.recently_updated.limit(3)
+    @similar_courses = Course.where.not(id: @course.id).published.approved
   end
 
   # GET /courses/new
