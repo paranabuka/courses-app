@@ -1,8 +1,8 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
-  before_action :set_course, only: %i[show edit update destroy approve reject analytics]
-  before_action :preload_tags, only: %i[index new edit my_enrolled pending_review my_created pending_approval]
+  before_action :set_course, only: %i[show destroy approve reject analytics]
+  before_action :preload_tags, only: %i[index new my_enrolled pending_review my_created pending_approval]
 
   # GET /courses or /courses.json
   def index
@@ -47,11 +47,6 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
 
-  # GET /courses/1/edit
-  def edit
-    authorize @course
-  end
-
   def pending_approval
     @ransack_path = pending_approval_courses_path
     ransack_and_pagy_courses(Course.published.not_approved)
@@ -82,26 +77,11 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to course_course_wizard_index_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         preload_tags
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /courses/1 or /courses/1.json
-  def update
-    authorize @course
-    respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
-      else
-        preload_tags
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
