@@ -81,7 +81,7 @@
             <td><%= enrollment.created_at.strftime("%Y-%m-%d %H:%M") %></td>
             <td><%= number_to_currency(enrollment.price) %></td>
             <td><%= number_to_percentage(enrollment.course.progress(enrollment.user), precision: 0) %></td>
-            <td><%= link_to 'Certificate', certificate_enrollment_path(enrollment, format: :pdf), target: :_blank, rel: :noopener %></td>
+            <td><%= link_to 'Certificate', certificate_enrollment_path(enrollment, format: :pdf), target: :_blank, rel: :noopener if policy(enrollment).certificate? %></td>
             <td><%= enrollment.rating %></td>
             <td><%= enrollment.review %></td>
             <td><%= enrollment.updated_at.strftime("%Y-%m-%d %H:%M") if enrollment.rating.present? %></td>

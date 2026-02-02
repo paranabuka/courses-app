@@ -24,6 +24,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def certificate
+    authorize @enrollment, :certificate?
     respond_to do |format|
       format.html
       format.pdf do

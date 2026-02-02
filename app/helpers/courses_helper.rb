@@ -19,6 +19,17 @@ module CoursesHelper
     see_review(enrollment)
   end
 
+  def certificate(course)
+    return unless current_user
+
+    enrollment = current_user.enrollments.find_by(course_id: course.id)
+
+    return unless enrollment
+    return unless policy(enrollment).certificate?
+
+    view_certificate(enrollment)
+  end
+
   private
 
   def check_price(course)
@@ -55,6 +66,13 @@ module CoursesHelper
     end
   end
 
+  def view_certificate(enrollment)
+    link_to certificate_enrollment_path(enrollment, format: :pdf), class: 'btn btn-primary btn-sm text-light',
+                                                                   target: :_blank, rel: :noopener do
+      "Certificate #{certificate_icon}".html_safe
+    end
+  end
+
   def star_icon
     content_tag(:i, '', class: 'text-warning fa-solid fa-star')
   end
@@ -71,5 +89,9 @@ module CoursesHelper
 
   def spinner_icon
     content_tag(:i, '', class: 'fa-solid fa-spinner')
+  end
+
+  def certificate_icon
+    content_tag(:i, '', class: 'fa-solid fa-certificate')
   end
 end
