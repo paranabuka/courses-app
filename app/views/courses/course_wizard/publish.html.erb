@@ -1,10 +1,7 @@
 <%= render layout: 'courses/course_wizard/step' do %>
   <%= simple_form_for @course, url: course_course_wizard_path, method: :put do |f| %>
     <div class="form-inputs">
-      <%= f.input :language, collection: Course.languages %>
-      <%= f.input :level, collection: Course.levels %>
-      <%= f.input :price %>
-      <%= f.select :tag_ids, @tags.pluck(:name, :id), {prompt: 'Tags'}, {multiple: true, class: "selectize-tags"} %>
+      <%= f.input :published %>
     </div>
     <div class="form-actions">
       <%= f.button :submit %>
