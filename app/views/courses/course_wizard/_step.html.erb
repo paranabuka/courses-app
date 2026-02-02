@@ -1,0 +1,44 @@
+<% content_for :title do %>
+  Edit
+  <%= @course.title %>
+<% end %>
+<div class="d-flex gap-2 mb-3">
+  <%= link_to 'Courses', courses_path %> /
+  <%= link_to course_path(@course) do %>
+    <i class="fa-solid fa-graduation-cap"></i>
+    <%= @course.title %>
+  <% end %> /
+  <%= link_to 'Wizard', course_course_wizard_index_path(@course) %> /
+  <%= step.to_s.humanize %>
+</div>
+<div class="card">
+  <div class="progress">
+    <div class="progress-bar" style="width: <%= @progress %>%"></div>
+  </div>
+  <div class="card-header">
+    <h1>
+      <%= "Step #{wizard_steps.index(step) + 1} of #{wizard_steps.count}: #{step.to_s.humanize}" %>
+    </h1>
+  </div>
+  <div class="card-body">
+    <%= yield %>
+  </div>
+  <div class="card-footer">
+    <div class="float-start">
+      <% if step == wizard_steps.first %>
+        <%= link_to 'Cancel', course_path(@course), class: 'btn btn-secondary btn-sm text-light' %>
+      <% else %>
+        <%= link_to previous_wizard_path, class: 'btn btn-info btn-sm text-light' do %>
+          <i class="fa-solid fa-arrow-left"></i>
+          Previous
+        <% end %>
+      <% end %>
+    </div>
+    <div class="float-end">
+      <%= link_to next_wizard_path, class: 'btn btn-info btn-sm text-light' do %>
+        Next
+        <i class="fa-solid fa-arrow-right"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

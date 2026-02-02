@@ -37,6 +37,7 @@
       <div class="card-footer">
         <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm text-light' %>
         <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning text-dark' %>
+        <%= link_to 'Wizard', course_course_wizard_index_path(course), class: 'btn btn-sm btn-warning text-dark' %>
         <%= link_to 'Destroy', course, class: 'btn btn-sm btn-danger text-light', method: :delete, data: { confirm: 'Are you sure?' } if policy(course).destroy? %>
         <%= link_to analytics_course_path(course), class: 'btn btn-sm btn-info text-light' do %>
           <div class="fa-solid fa-chart-area"></div>

@@ -1,0 +1,22 @@
+<%= render layout: 'courses/course_wizard/step' do %>
+  <%= simple_form_for @course, url: course_course_wizard_path, method: :put do |f| %>
+    <div class="form-inputs">
+      <%= f.input :title, input_html: { autocomplete: 'off'} %>
+      <%= f.input :cover %>
+      <% if @course.cover.attached? %>
+        <figure>
+          <%= image_tag @course.cover, class: 'img-thumbnail', alt: 'Course cover', width: '300px' %>
+          <figcaption class="figure-caption">
+            <%= "#{@course.cover.filename} (#{number_to_human_size(@course.cover.byte_size)})" %>
+          </figcaption>
+        </figure>
+        <div class="row mb-3"></div>
+      <% end %>
+      <%= f.input :description, as: :rich_text_area %>
+      <%= f.input :short_description %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+<% end %>

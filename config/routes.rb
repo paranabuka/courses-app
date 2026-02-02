@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
     
     resources :enrollments, only: [:new, :create]
+    resources :course_wizard, controller: 'courses/course_wizard'
 
     get :my_enrolled, :pending_review, :my_created, :pending_approval, on: :collection
 
