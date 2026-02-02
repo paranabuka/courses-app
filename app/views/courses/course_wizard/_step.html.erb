@@ -21,6 +21,11 @@
     </h1>
   </div>
   <div class="card-body">
+    <div class="container text-danger">
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end if @course.errors.any? %>
+    </div>
     <%= yield %>
   </div>
   <div class="card-footer">

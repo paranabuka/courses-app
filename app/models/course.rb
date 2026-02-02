@@ -10,13 +10,14 @@ class Course < ApplicationRecord
   has_one_attached :cover
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 3, maximum: 60 }
-  validates :short_description, presence: true, length: { minimum: 5, maximum: 300 }
-  validates :description, presence: true, length: { maximum: 3_000 }
+  validates :short_description, presence: true, length: { minimum: 5, maximum: 300 }, on: :update
+  validates :description, presence: true, length: { maximum: 3_000 }, on: :update
   validates :language, :level, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :cover, presence: true,
                     content_type: ['image/png', 'image/jpeg'],
-                    size: { less_than: 200.kilobytes }
+                    size: { less_than: 200.kilobytes },
+                    on: :update
 
   extend FriendlyId
   friendly_id :title, use: :slugged
