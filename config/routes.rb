@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   
   resources :enrollments do
     get :students, on: :collection
+    get :certificate, on: :member
   end
   
   get 'activities', to: 'home#activities'
