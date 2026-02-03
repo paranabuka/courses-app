@@ -38,6 +38,16 @@
     <%= user.last_sign_in_ip %>
   </div>
   <div class="card-footer">
+    <b><%= 'courses_income'.humanize %>:</b>
+    <%= user.course_income %>
+    <div class="row"></div>
+    <b><%= 'enrollment_expenses'.humanize %>:</b>
+    <%= user.enrollment_expenses %>
+    <div class="row"></div>
+    <b><%= 'balance'.humanize %>:</b>
+    <%= user.balance %>
+  </div>
+  <div class="card-footer">
     <i class="fa-solid fa-graduation-cap"></i>
     Courses created:
     <%= user.courses_count %>

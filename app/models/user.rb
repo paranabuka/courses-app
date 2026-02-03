@@ -63,6 +63,16 @@ class User < ApplicationRecord
     user_lesson.increment!(:impressions)
   end
 
+  def calculate_balance
+    update_column :enrollment_expenses, enrollments.map(&:price).sum
+    update_column :balance, (course_income - enrollment_expenses)
+  end
+
+  def calculate_income
+    update_column :course_income, courses.map(&:income).sum
+    update_column :balance, (course_income - enrollment_expenses)
+  end
+
   private
 
   def assign_default_role

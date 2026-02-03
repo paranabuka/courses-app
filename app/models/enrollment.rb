@@ -42,6 +42,13 @@ class Enrollment < ApplicationRecord
 
   after_destroy do
     course.update_average_rating
+    course.calculate_income
+    user.calculate_balance
+  end
+
+  after_create do
+    course.calculate_income
+    user.calculate_balance
   end
 
   protected
