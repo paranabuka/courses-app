@@ -1,0 +1,26 @@
+<b>You have enrolled to the course</b>
+<%= link_to @course, @course %>
+<div class="row"></div>
+<b>Enrollment date:</b>
+<%= @enrollment.created_at.strftime('%Y-%m-%d %H:%M') %>
+<div class="row"></div>
+<b>Enrollment ID:</b>
+<%= @enrollment.slug %>
+<div class="row"></div>
+<b>Course price:</b>
+<%= number_to_currency(@course.price) %>
+<div class="row"></div>
+<b>Price paid:</b>
+<%= number_to_currency(@enrollment.price) %>
+<div class="row"></div>
+<b>Course instructor:</b>
+<%= @course.user.username %>
+<%= mail_to @course.user.email, @course.user.email %>
+<p></p>
+After completing the course, you will be entitled to a Certificate of Completion.
+<div class="row"></div>
+Thanks for choosing our platform!
+<p></p>
+Regards,
+<div class="row"></div>
+<%= link_to 'The Paranabuka Courses team', root_url %>

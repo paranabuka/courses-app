@@ -53,6 +53,8 @@ class EnrollmentsController < ApplicationController
   def create
     @enrollment = @current_user.enroll_in(@course)
     redirect_to course_path(@course), notice: 'You have successfully enrolled in the course.'
+    EnrollmentMailer.new_enrollment(@enrollment).deliver_later
+    EnrollmentMailer.new_student(@enrollment).deliver_later
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json
