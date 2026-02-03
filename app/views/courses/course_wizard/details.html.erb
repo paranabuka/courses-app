@@ -7,7 +7,7 @@
       <%= f.select :tag_ids, @tags.pluck(:name, :id), {prompt: 'Tags'}, {multiple: true, class: "selectize-tags"} %>
     </div>
     <div class="form-actions">
-      <%= f.button :submit %>
+      <%= f.button :submit, 'Save & Continue' %>
     </div>
   <% end %>
 <% end %>

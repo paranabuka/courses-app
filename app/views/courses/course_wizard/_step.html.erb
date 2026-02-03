@@ -16,9 +16,9 @@
     <div class="progress-bar" style="width: <%= @progress %>%"></div>
   </div>
   <div class="card-header">
-    <h1>
-      <%= "Step #{wizard_steps.index(step) + 1} of #{wizard_steps.count}: #{step.to_s.humanize}" %>
-    </h1>
+    <h3>
+      <%= "#{step.to_s.humanize} (#{wizard_steps.index(step) + 1} of #{wizard_steps.count})" %>
+    </h3>
   </div>
   <div class="card-body">
     <div class="container text-danger">
@@ -35,14 +35,18 @@
       <% else %>
         <%= link_to previous_wizard_path, class: 'btn btn-info btn-sm text-light' do %>
           <i class="fa-solid fa-arrow-left"></i>
-          Previous
+          Back
         <% end %>
       <% end %>
     </div>
     <div class="float-end">
-      <%= link_to next_wizard_path, class: 'btn btn-info btn-sm text-light' do %>
-        Next
-        <i class="fa-solid fa-arrow-right"></i>
+      <% if step == wizard_steps.last %>
+        <%= link_to 'Cancel', course_path(@course), class: 'btn btn-secondary btn-sm text-light' %>
+      <% else %>
+        <%= link_to next_wizard_path, class: 'btn btn-info btn-sm text-light' do %>
+          Skip
+          <i class="fa-solid fa-arrow-right"></i>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -19,6 +19,7 @@ require("chart.js");
 require("jquery");
 require("jquery-ui-dist/jquery-ui");
 require("selectize");
+require("@nathanvda/cocoon");
 
 // Optional: Test if it's working
 $(document).on("turbolinks:load", () => {

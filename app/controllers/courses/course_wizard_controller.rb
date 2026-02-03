@@ -4,7 +4,7 @@ class Courses::CourseWizardController < ApplicationController
   before_action :set_course, only: %i[show update finish_wizard_path]
   before_action :set_progress, only: %i[show update]
 
-  steps :general_info, :details, :publish
+  steps :general_info, :details, :lessons, :publish
 
   def show
     authorize @course, :edit?
@@ -22,7 +22,7 @@ class Courses::CourseWizardController < ApplicationController
       preload_tags
     end
     @course.update(course_params)
-    render_wizard
+    render_wizard @course
   end
 
   def finish_wizard_path
@@ -52,7 +52,12 @@ class Courses::CourseWizardController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published,
-                                   :cover, tag_ids: [])
+    params.require(:course).permit(
+      :title, :description, :short_description, :cover,
+      :language, :level, :price,
+      :published,
+      tag_ids: [],
+      lessons_attributes: %i[id title content _destroy]
+    )
   end
 end
