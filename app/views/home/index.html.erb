@@ -2,11 +2,8 @@
   Learn anything, on your schedule
 <% end %>
 <div class="container-fluid text-lg-left p-5 bg-light">
-  <div class="display-5 fw-bold mb-5">
+  <div class="display-5 fw-bold mb-4">
     What do you want to learn today?
-  </div>
-  <div class="display-6 mb-5">
-    Join to access all courses
   </div>
   <% if current_user %>
     <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
@@ -14,6 +11,28 @@
         <%= f.search_field :title_or_short_description_cont, class: "form-control me-2", placeholder: "Find a course", aria_label: 'Search', autocomplete: 'off' %>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </div>
+    <% end %>
+  <% else %>
+    <div class="display-6 mb-3">
+      Join to access all courses
+    </div>
+    <%= link_to new_user_session_path, class: 'btn btn-outline-secondary' do %>
+      Log in
+      <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    <% end %>
+    <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-secondary' %>
+    <h5 class="fw-light mt-4">Or continue with:</h5>
+    <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-danger btn-lg text-light', method: :post do %>
+      Google
+      <i class="fa-brands fa-google"></i>
+    <% end %>
+    <%= link_to user_github_omniauth_authorize_path, class: 'btn btn-dark btn-lg text-light', method: :post do %>
+      Github
+      <i class="fa-brands fa-github"></i>
+    <% end %>
+    <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-primary btn-lg text-light', method: :post do %>
+      Facebook
+      <i class="fa-brands fa-facebook"></i>
     <% end %>
   <% end %>
 </div>
