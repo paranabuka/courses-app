@@ -15,7 +15,7 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :email, use: :slugged
 
-  after_create :assign_default_role
+  after_create :assign_default_role, :notify_registration
 
   validate :must_have_at_least_one_role, on: :update
 
@@ -67,6 +67,10 @@ class User < ApplicationRecord
 
   def assign_default_role
     add_role(:student) if roles.blank?
+  end
+
+  def notify_registration
+    UserMailer.new_registration(self).deliver_later
   end
 
   def must_have_at_least_one_role
