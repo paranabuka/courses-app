@@ -27,6 +27,18 @@ class User < ApplicationRecord
     email.split('@').first
   end
 
+  def course_income
+    read_attribute(:course_income) / 100.0
+  end
+
+  def enrollment_expenses
+    read_attribute(:enrollment_expenses) / 100.0
+  end
+
+  def balance
+    read_attribute(:balance) / 100.0
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[id email]
   end

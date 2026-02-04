@@ -39,13 +39,13 @@
   </div>
   <div class="card-footer">
     <b><%= 'courses_income'.humanize %>:</b>
-    <%= user.course_income %>
+    <%= number_to_currency(user.course_income) %>
     <div class="row"></div>
     <b><%= 'enrollment_expenses'.humanize %>:</b>
-    <%= user.enrollment_expenses %>
+    <%= number_to_currency(user.enrollment_expenses) %>
     <div class="row"></div>
     <b><%= 'balance'.humanize %>:</b>
-    <%= user.balance %>
+    <%= number_to_currency(user.balance) %>
   </div>
   <div class="card-footer">
     <i class="fa-solid fa-graduation-cap"></i>

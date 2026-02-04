@@ -8,10 +8,10 @@
 <%= @enrollment.slug %>
 <div class="row"></div>
 <b>Course price:</b>
-<%= number_to_currency(@course.price) %>
+<%= number_to_currency(@course.price / 100.0) %>
 <div class="row"></div>
 <b>Price paid:</b>
-<%= number_to_currency(@enrollment.price) %>
+<%= number_to_currency(@enrollment.price / 100.0) %>
 <div class="row"></div>
 <b>Student:</b>
 <%= @enrollment.user.username %>

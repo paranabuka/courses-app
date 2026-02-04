@@ -110,7 +110,7 @@ class EnrollmentsController < ApplicationController
           quantity: 1,
           price_data: {
             product_data: { name: "Enrollment for #{course.title}" },
-            unit_amount: course.price * 100,
+            unit_amount: course.price,
             currency: 'usd'
           }
         }],

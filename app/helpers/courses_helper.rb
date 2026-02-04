@@ -47,7 +47,8 @@ module CoursesHelper
   end
 
   def proceed_to_payment(course)
-    link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success text-light'
+    link_to number_to_currency(course.price / 100.0), new_course_enrollment_path(course),
+            class: 'btn btn-success text-light'
   end
 
   def free_enrollment(course)

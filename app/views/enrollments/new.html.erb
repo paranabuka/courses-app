@@ -14,7 +14,7 @@
   <div class="card-body">
     <%= form_tag course_enrollments_path(@course) do %>
       <% if @course.price.positive? %>
-        <%= submit_tag "Pay $#{@course.price}", class: 'btn btn-success btn-lg' %>
+        <%= submit_tag "Pay #{number_to_currency@course.price / 100.0}", class: 'btn btn-success btn-lg' %>
       <% else %>
         <%= submit_tag 'Enroll for free', class: 'btn btn-success btn-lg' %>
       <% end %>

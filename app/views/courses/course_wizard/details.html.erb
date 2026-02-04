@@ -2,8 +2,8 @@
   <%= simple_form_for @course, url: course_course_wizard_path, method: :put do |f| %>
     <div class="form-inputs">
       <%= f.input :language, collection: Course.languages %>
-      <%= f.input :level, collection: Course.levels %>
-      <%= f.input :price %>
+      <%= f.input :level, collection: Course.levels, as: :radio_buttons, item_wrapper_class: 'form-check form-check-inline' %>
+      <%= f.input :price, collection: Course.prices.map { |p, value| [number_to_currency(p), value] }, as: :radio_buttons, item_wrapper_class: 'form-check form-check-inline' %>
       <%= f.select :tag_ids, @tags.pluck(:name, :id), {prompt: 'Tags'}, {multiple: true, class: "selectize-tags"} %>
     </div>
     <div class="form-actions">
