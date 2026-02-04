@@ -53,5 +53,8 @@ Rails.application.routes.draw do
 
   get 'privacy_policy', to: 'static_pages#privacy_policy'
 
+  # Prevent Chrome DevTools Routing Errors
+  get '/.well-known/appspecific/com.chrome.devtools.json', to: proc { [200, { 'Content-Type' => 'application/json' }, ['{}']] }
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
