@@ -30,7 +30,7 @@
           <% end %>
         <% end %>
         <% if current_user&.has_role?(:student) %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" style="z-index: 1060;">
             <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa-solid fa-user-graduate"></div>
               <b>Learn</b>
@@ -54,7 +54,7 @@
           </li>
         <% end %>
         <% if current_user&.has_role?(:instructor) %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" style="z-index: 1060;">
             <a class="nav-link dropdown-toggle" href="#" id="instructorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa-solid fa-chalkboard-user"></div>
               <b>Teach</b>
@@ -82,7 +82,7 @@
           </li>
         <% end %>
         <% if current_user&.has_role?(:admin) %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" style="z-index: 1060;">
             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa-solid fa-gear"></div>
               <b>Admin</b>
@@ -121,7 +121,7 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <% if current_user %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" style="z-index: 1060;">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <% if current_user.provider.present? %>
                 <%= image_tag current_user.image, size: '24x24', alt: current_user.email, class: 'rounded-circle' %>
