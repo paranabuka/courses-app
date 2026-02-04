@@ -3,7 +3,6 @@
     <div class="form-inputs">
       <%= f.simple_fields_for :lessons do |lesson| %>
         <%= render 'lesson_fields', f: lesson %>
-        <hr class="border border-secondary border-2 opacity-50">
       <% end %>
       <div class="links mb-3">
         <%= link_to_add_association 'Add lesson', f, :lessons %>

@@ -8,20 +8,16 @@ class Courses::CourseWizardController < ApplicationController
 
   def show
     authorize @course, :edit?
-    case step
-    when :details
-      preload_tags
-    end
+    preload_tags if step == :details
+
     render_wizard
   end
 
   def update
     authorize @course, :edit?
-    case step
-    when :details
-      preload_tags
-    end
-    @course.update(course_params)
+    preload_tags if step == :details
+    @course.update(course_params) unless step == :lessons && params[:course].blank?
+
     render_wizard @course
   end
 
