@@ -21,7 +21,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/google_analytics' if Rails.env.production? %>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%= render 'layouts/header' %>
     <%= render 'layouts/notifications' %>
     <div class="container p-3">
