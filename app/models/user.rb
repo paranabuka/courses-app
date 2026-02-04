@@ -15,6 +15,9 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :email, use: :slugged
 
+  include PublicActivity::Model
+  tracked only: %i[create destroy] # , owner: :itself
+
   after_create :assign_default_role, :notify_registration
 
   validate :must_have_at_least_one_role, on: :update

@@ -22,8 +22,10 @@
       <% end %>
       <%= action_tag(activity.key.split('.').last) %>
       <%= activity.key %>
-      by
-      <%= link_to activity.owner, user_path(activity.owner) %>
+      <% if activity.owner %>
+        by
+        <%= link_to activity.owner, user_path(activity.owner) %>
+      <% end %>
       <% if activity.parameters.any? %>
         <%= "with #{activity.parameters}" %>
       <% end %>

@@ -3,6 +3,8 @@ module ApplicationHelper
 
   def type_tag(model)
     case model
+    when User.name
+      content_tag(:i, '', class: 'fa-solid fa-user')
     when Course.name
       content_tag(:i, '', class: 'fa-solid fa-graduation-cap')
     when Lesson.name
